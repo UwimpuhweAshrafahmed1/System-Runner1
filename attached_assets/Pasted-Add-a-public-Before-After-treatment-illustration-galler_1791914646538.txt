@@ -1,0 +1,72 @@
+Add a public “Before & After” treatment illustration gallery to my existing MediMATCH website.
+
+Use the supplied website only as a reference for gallery layout and navigation. Build this feature in my existing application and preserve its working functionality.
+
+ORIGINAL CONTENT AND BRANDING
+- Use MediMATCH branding and our existing navy, cyan, deep orange, red, green, and yellow design.
+- Do not import or display IME Clinic’s name, logo, text, patient photographs, testimonials, links, or watermarked assets.
+- Do not erase watermarks from their photographs or reuse edited versions. Replace those assets entirely with newly generated illustrations.
+- Do not use their patient faces as references for image generation.
+- Do not copy their tracking scripts, forms, or external service connections.
+
+GENERATE ORIGINAL 3D TREATMENT ILLUSTRATIONS
+Create realistic, tasteful 3D human illustrations for the treatments actually offered on my website.
+
+Represent an international audience with varied skin tones, ethnic backgrounds, adult ages, and genders across the gallery. Avoid stereotypes.
+
+Each before-and-after pair must:
+- Show the SAME fictional adult model with identical facial identity, skin tone, pose, camera angle, lighting, background, and framing.
+- Change only the relevant treatment area.
+- Illustrate a plausible treatment-related change without exaggerated perfection or guaranteed outcomes.
+- Use non-graphic, clinically appropriate presentation.
+- Never depict a real patient or imply the model received treatment.
+- Never change ethnicity or lighten skin as an implied treatment benefit.
+
+For procedures whose results cannot be meaningfully shown externally, use a labelled anatomical 3D explanation instead of a misleading appearance comparison.
+
+Clearly display on EVERY comparison:
+“3D illustration — not a real patient. Treatment outcomes vary.”
+
+Use the section title:
+“Before & After: Treatment Illustrations”
+
+Include a short explanation:
+“Explore illustrative examples of potential treatment changes. These computer-generated images are educational examples, not actual patient results or predictions of your outcome.”
+
+Do not claim these images demonstrate MediMATCH’s clinical results. Do not invent recovery times or clinical claims. Mark illustrations for clinical review before public release.
+
+If image generation is unavailable, implement the gallery and asset slots, then report that original illustrations are still required. Do not substitute copied patient photographs or pretend images have been generated.
+
+GALLERY FUNCTIONALITY
+- Add a “Before & After” navigation link to the public website.
+- Provide filters for existing treatment categories.
+- Include comparison cards with treatment name, clear Before/After labels, and a short factual description.
+- Provide an accessible draggable comparison slider with keyboard controls and a side-by-side viewing option.
+- On mobile, support touch interaction without disrupting page scrolling.
+- Open larger comparisons in an accessible modal.
+- Keep the illustration disclosure visible in cards and enlarged views.
+- Embed a small “3D illustration” label in exported images so their context remains clear when shared.
+- Connect “Ask about this treatment” to the existing consultation flow.
+- Optimise image sizes, use lazy loading, and prevent layout shifts.
+- Add descriptive alt text identifying the images as illustrations.
+
+PRESERVE MY EXISTING SYSTEM
+Before editing:
+1. Inspect the current routes, components, styles, treatment data, and available integrations.
+2. Create a checkpoint.
+3. Reuse the existing stack and safe shared components.
+
+Do not break or replace authentication, roles, CRM, dashboards, appointments, forms, database records, or existing integrations.
+Keep styles scoped to the new feature.
+Do not reset the database, delete existing assets, or overwrite unrelated pages.
+Do not introduce unnecessary dependencies.
+
+VERIFICATION
+- Run the build and relevant checks.
+- Test the gallery, filters, slider, modal, navigation, and consultation links on desktop and mobile.
+- Check keyboard access and browser/server errors.
+- Verify that existing sign-in and core application flows still work.
+- Check the new feature’s visible text, image assets, metadata, alt text, filenames, and outbound links for unwanted reference-site branding or copied content.
+- Keep the feature in preview until original assets and clinical descriptions have been reviewed. Do not publish automatically.
+
+Implement the feature and finish by reporting what changed, what you tested, and which images or reviews remain outstanding. Do not claim any functionality or generated assets are complete unless verified.

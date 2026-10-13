@@ -25,12 +25,15 @@ type BookingLinkOptions = {
   treatment?: CareTreatmentSlug;
   destination?: string;
   language?: string;
+  /** Slug of the Before & After illustration the visitor asked about. */
+  illustration?: string;
 };
 
 /** Builds a link to the booking page that carries the visitor's choices. */
-export function bookingHref({ treatment, destination, language }: BookingLinkOptions = {}) {
+export function bookingHref({ treatment, destination, language, illustration }: BookingLinkOptions = {}) {
   const params = new URLSearchParams();
   if (treatment) params.set("treatment", treatment);
+  if (illustration) params.set("illustration", illustration);
   const cleanDestination = destination?.trim().slice(0, carePreferenceMaxLength);
   const cleanLanguage = language?.trim().slice(0, carePreferenceMaxLength);
   if (cleanDestination) params.set("destination", cleanDestination);

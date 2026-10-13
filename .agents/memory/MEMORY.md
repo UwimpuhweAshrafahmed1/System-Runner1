@@ -1,2 +1,4 @@
 - [Clerk session claims and signed-in testing](clerk-session-and-testing.md) — session JWT has no email/name here; use Backend API. How to test signed-in API calls and time UI tests.
 - [Screenshot capture quirks](screenshot-capture-quirks.md) — full-page captures blank lazy images and misplace fixed elements; use a tall viewport, crop with magick.
+- [Shared header width budget](header-width-budget.md) — header has ~no spare width; new links or labels need breakpoint checks, incl. the wider signed-in label.
+- [Before & After illustration QA](before-after-illustrations.md) — same model/framing, never lighter skin after, edit "after" from "before"; raw renders are gitignored.

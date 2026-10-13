@@ -2,10 +2,12 @@ import { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import { Mail, MessageCircle } from "lucide-react";
 import { StudioMark } from "@/components/site/SiteShell";
-import { HomeLink } from "./HomeLink";
+import { galleryAvailable, galleryPath } from "@/lib/illustrations";
+import { HomeLink, useHomeHref } from "./HomeLink";
 import { contactLinks, navLinks } from "./homeContent";
 
 export function HomeFooter() {
+  const homeHref = useHomeHref();
   return (
     <footer className="mmh-footer" id="contact">
       <div className="mmh-container mmh-footer__inner">
@@ -15,16 +17,23 @@ export function HomeFooter() {
         <nav aria-label="Footer">
           <ul className="mmh-footer__links">
             <li>
-              <a href={navLinks.treatments}>Treatments</a>
+              <HomeLink href={homeHref(navLinks.treatments)}>Treatments</HomeLink>
             </li>
+            {galleryAvailable && (
+              <li>
+                <HomeLink href={galleryPath} data-testid="link-footer-before-after">
+                  Before &amp; After
+                </HomeLink>
+              </li>
+            )}
             <li>
               <HomeLink href={navLinks.doctors}>Doctors &amp; hospitals</HomeLink>
             </li>
             <li>
-              <a href={navLinks.howItWorks}>How it works</a>
+              <HomeLink href={homeHref(navLinks.howItWorks)}>How it works</HomeLink>
             </li>
             <li>
-              <a href={navLinks.about}>About us</a>
+              <HomeLink href={homeHref(navLinks.about)}>About us</HomeLink>
             </li>
             <li>
               <a href={contactLinks.general}>Contact</a>

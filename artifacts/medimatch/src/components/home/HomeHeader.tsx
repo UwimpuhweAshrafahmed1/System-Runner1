@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState, type FocusEvent, type RefObject } from "react";
-import { Link } from "wouter";
+import { Link, useLocation } from "wouter";
 import { useAuth } from "@clerk/react";
 import { ArrowRight, ChevronDown, Globe, Headset, Menu, X } from "lucide-react";
 import { StudioMark } from "@/components/site/SiteShell";
-import { HomeLink } from "./HomeLink";
+import { galleryAvailable, galleryPath } from "@/lib/illustrations";
+import { HomeLink, useHomeHref } from "./HomeLink";
 import { navLinks, treatmentMenu } from "./homeContent";
 
 /** Closes a popup on Escape or on a click outside it. */
@@ -37,6 +38,7 @@ function TreatmentsMenu() {
   const wrapRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
   const close = useRef(() => setOpen(false)).current;
+  const homeHref = useHomeHref();
   useDismiss(open, close, wrapRef, buttonRef);
 
   // Keyboard users tabbing past the last link close the menu. A null target
@@ -68,9 +70,9 @@ function TreatmentsMenu() {
             </li>
           ))}
         </ul>
-        <a className="mmh-menu__all" href={navLinks.treatments} onClick={close}>
+        <HomeLink className="mmh-menu__all" href={homeHref(navLinks.treatments)} onClick={close}>
           Browse popular treatments <ArrowRight size={15} aria-hidden="true" />
-        </a>
+        </HomeLink>
       </div>
     </div>
   );
@@ -84,6 +86,9 @@ export function HomeHeader() {
   const toggleRef = useRef<HTMLButtonElement>(null);
   const closeMenu = useRef(() => setMenuOpen(false)).current;
   useDismiss(menuOpen, closeMenu, headerRef, toggleRef);
+  const homeHref = useHomeHref();
+  const [location] = useLocation();
+  const galleryCurrent = location === galleryPath ? "page" : undefined;
 
   return (
     <>
@@ -98,7 +103,8 @@ export function HomeHeader() {
         </div>
       </div>
 
-      <header className="mmh-header" ref={headerRef}>
+      {/* mmba-gallery-nav: the extra link needs more width (styles/before-after.css). */}
+      <header className={galleryAvailable ? "mmh-header mmba-gallery-nav" : "mmh-header"} ref={headerRef}>
         <div className="mmh-container mmh-header__inner">
           <Link href="/" className="mmh-header__brand" aria-label="MediMATCH home">
             <StudioMark />
@@ -109,22 +115,35 @@ export function HomeHeader() {
               <li>
                 <TreatmentsMenu />
               </li>
+              {galleryAvailable && (
+                <li>
+                  <HomeLink
+                    className="mmh-nav__link"
+                    href={galleryPath}
+                    aria-current={galleryCurrent}
+                    data-testid="link-nav-before-after"
+                  >
+                    Before &amp; After
+                  </HomeLink>
+                </li>
+              )}
               <li>
                 <HomeLink className="mmh-nav__link" href={navLinks.doctors}>
                   Doctors &amp; hospitals
                 </HomeLink>
               </li>
               <li>
-                <a className="mmh-nav__link" href={navLinks.howItWorks}>
+                <HomeLink className="mmh-nav__link" href={homeHref(navLinks.howItWorks)}>
                   How it works
-                </a>
+                </HomeLink>
               </li>
               <li>
-                <a className="mmh-nav__link" href={navLinks.about}>
+                <HomeLink className="mmh-nav__link" href={homeHref(navLinks.about)}>
                   About us
-                </a>
+                </HomeLink>
               </li>
               <li>
+                {/* Every page with this header ends with the contact footer. */}
                 <a className="mmh-nav__link" href={navLinks.contact}>
                   Contact
                 </a>
@@ -157,24 +176,36 @@ export function HomeHeader() {
           <nav className="mmh-container" aria-label="Main (mobile)">
             <ul>
               <li>
-                <a href={navLinks.treatments} onClick={closeMenu}>
+                <HomeLink href={homeHref(navLinks.treatments)} onClick={closeMenu}>
                   Treatments
-                </a>
+                </HomeLink>
               </li>
+              {galleryAvailable && (
+                <li>
+                  <HomeLink
+                    href={galleryPath}
+                    onClick={closeMenu}
+                    aria-current={galleryCurrent}
+                    data-testid="link-mobile-before-after"
+                  >
+                    Before &amp; After
+                  </HomeLink>
+                </li>
+              )}
               <li>
                 <HomeLink href={navLinks.doctors} onClick={closeMenu}>
                   Doctors &amp; hospitals
                 </HomeLink>
               </li>
               <li>
-                <a href={navLinks.howItWorks} onClick={closeMenu}>
+                <HomeLink href={homeHref(navLinks.howItWorks)} onClick={closeMenu}>
                   How it works
-                </a>
+                </HomeLink>
               </li>
               <li>
-                <a href={navLinks.about} onClick={closeMenu}>
+                <HomeLink href={homeHref(navLinks.about)} onClick={closeMenu}>
                   About us
-                </a>
+                </HomeLink>
               </li>
               <li>
                 <a href={navLinks.contact} onClick={closeMenu}>

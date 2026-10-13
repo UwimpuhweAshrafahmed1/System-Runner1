@@ -1,5 +1,5 @@
-import type { AnchorHTMLAttributes, MouseEvent } from "react";
-import { Link } from "wouter";
+import { useCallback, type AnchorHTMLAttributes, type MouseEvent } from "react";
+import { Link, useLocation } from "wouter";
 
 type HomeLinkProps = Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href"> & { href: string };
 
@@ -21,4 +21,20 @@ export function HomeLink({ href, onClick, ...rest }: HomeLinkProps) {
     if (!event.defaultPrevented && !opensElsewhere) scrollToPageTop();
   };
   return <Link href={href} onClick={handleClick} {...rest} />;
+}
+
+/**
+ * Homepage section anchors ("#about") work as-is on the homepage; on other
+ * pages that share the header and footer they point back to the homepage.
+ */
+export function useHomeHref() {
+  const [location] = useLocation();
+  const onHome = location === "/";
+  return useCallback((href: string) => (href.startsWith("#") && !onHome ? `/${href}` : href), [onHome]);
+}
+
+/** On arrival from another page, scrolls to the homepage section named in the address. */
+export function scrollToHashTarget() {
+  const id = decodeURIComponent(window.location.hash.slice(1));
+  if (id) document.getElementById(id)?.scrollIntoView({ behavior: "instant", block: "start" });
 }

@@ -10,6 +10,7 @@ MediMATCH is a connected-care website where patients book appointments with care
 - `pnpm run build` — typecheck + build all packages
 - `pnpm --filter @workspace/api-spec run codegen` — regenerate API hooks and Zod schemas from the OpenAPI spec
 - `pnpm --filter @workspace/db run push` — push DB schema changes (dev only)
+- `pnpm --filter @workspace/scripts run before-after-images` — rebuild the Before & After gallery images (labels, burned-in "3D illustration" badge, WebP at 600/1024 px) from the raw renders in `generated-artifacts/before-after/raw/` (gitignored; needs ImageMagick)
 - Required env: `DATABASE_URL`, Clerk keys (`CLERK_SECRET_KEY`, `CLERK_PUBLISHABLE_KEY`, `VITE_CLERK_PUBLISHABLE_KEY`), `MEDIMATCH_ADMIN_EMAIL` (shared env var: the email that becomes the first admin)
 
 ## Stack
@@ -27,6 +28,7 @@ MediMATCH is a connected-care website where patients book appointments with care
 - `artifacts/medimatch/src/App.tsx` — routes and Clerk setup; pages in `src/pages/`
 - `artifacts/medimatch/src/styles/medimatch.css` — the original styles; `additions.css` — new styles, imported after it
 - Public homepage: `src/pages/HomePage.tsx` + `src/components/home/`, styled only by `src/styles/home.css` (every rule scoped under `.mmh`, so other pages are unaffected); photos are WebP in `public/medimatch/home/`
+- Before & After gallery (`/before-after`): `src/pages/BeforeAfterPage.tsx` + `src/components/before-after/`, styled only by `src/styles/before-after.css` (`.mmba` prefix); illustration data and alt text in `src/lib/illustrations.ts`; images in `public/medimatch/before-after/`
 - `artifacts/medimatch/src/lib/treatments.ts` — the treatment list shared by the homepage links and the booking page select
 - `artifacts/medimatch/src/lib/account.ts` — signed-in account state and role → workspace mapping
 - `lib/api-spec/openapi.yaml` — API contract; `lib/db/src/schema/medimatch.ts` — DB schema
@@ -39,10 +41,11 @@ MediMATCH is a connected-care website where patients book appointments with care
 - Booking slots are generated in the browser (30 minutes, weekdays 09:00–17:00 UTC). The database enforces one active booking per provider and time through a partial unique index, and the API returns 409 when a slot is taken.
 - Clerk is cookie-based (no bearer tokens) and styled through `appearance` in `App.tsx`, never through `.cl-*` CSS selectors.
 - There is no live provider search. The homepage care search opens `/appointments?treatment=&destination=&language=`; the booking page preselects the treatment and puts destination and language in the coordinator notes.
+- Before & After images are original computer-generated illustrations of fictional people or anatomical models, never patient photos. Each illustration has `clinicalReview: "pending" | "approved"`: the dev preview shows all of them with a review tag, the published build shows only approved ones, and with none approved `/before-after` is a 404 and the nav link is hidden. "Ask about this treatment" opens `/appointments?treatment=&illustration=`, which pre-fills the coordinator note.
 
 ## Product
 
-- Public homepage, appointment booking page, and a sign-in page with workspace chooser
+- Public homepage, Before & After illustration gallery (awaiting clinical review, so preview only), appointment booking page, and a sign-in page with workspace chooser
 - Patient portal (`/account`): own requests and upcoming appointments, with cancel
 - Clinic workspace (`/employee`), partner workspace (`/partner`, no patient data), CEO workspace (`/ceo`) with team access management, and a staff care desk (`/care-dashboard`) for status changes
 - Not connected yet: consultation notes, email/SMS reminders, payments. "Recommend for me" opens an email to the care desk.

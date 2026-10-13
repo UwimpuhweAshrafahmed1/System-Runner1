@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import {
   ArrowRight,
   Check,
@@ -12,7 +13,7 @@ import {
 import { CareSearchPanel } from "@/components/home/CareSearchPanel";
 import { HomeFooter, SupportButton } from "@/components/home/HomeFooter";
 import { HomeHeader } from "@/components/home/HomeHeader";
-import { HomeLink } from "@/components/home/HomeLink";
+import { HomeLink, scrollToHashTarget } from "@/components/home/HomeLink";
 import {
   contactLinks,
   journeySteps,
@@ -311,6 +312,11 @@ function ConsultationBanner() {
 }
 
 export default function HomePage() {
+  // Links such as "/#how-it-works" from other pages land on the right section.
+  useEffect(() => {
+    scrollToHashTarget();
+  }, []);
+
   return (
     <div className="mmh">
       <a className="mmh-skip-link" href="#mmh-main">

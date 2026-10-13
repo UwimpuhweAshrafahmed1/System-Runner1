@@ -29,6 +29,7 @@ import {
 } from "@workspace/api-client-react";
 import { apiErrorMessage } from "@/lib/api-errors";
 import { useMediMatchAccount, useSignOut, useStartSignIn } from "@/lib/account";
+import { illustrationBySlug } from "@/lib/illustrations";
 import { careTreatments, carePreferencesNote, treatmentBySlug } from "@/lib/treatments";
 import {
   addDays,
@@ -120,11 +121,18 @@ export default function PatientCarePage() {
     } else if (intent === "facility") {
       setRecommendationMode(true);
     }
-    // Choices made on the homepage (treatment, destination, language).
+    // Choices made on the homepage (treatment, destination, language) or in
+    // the Before & After gallery (the illustration the patient asked about).
     const treatment = treatmentBySlug(params.get("treatment"));
     if (treatment) setTreatmentName(treatment.name);
-    const preferences = carePreferencesNote(params);
-    if (preferences) setReason(preferences);
+    const illustration = illustrationBySlug(params.get("illustration"));
+    const notes = [
+      illustration ? `Asked about the Before & After illustration: ${illustration.title}` : "",
+      carePreferencesNote(params),
+    ]
+      .filter(Boolean)
+      .join("\n");
+    if (notes) setReason(notes);
   }, []);
 
   useEffect(() => {

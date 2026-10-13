@@ -15,6 +15,7 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import { queryClient } from '@/lib/queryClient';
 import AdminDashboardPage from '@/pages/AdminDashboardPage';
 import { SignInPage, SignUpPage } from '@/pages/AuthPages';
+import BeforeAfterPage from '@/pages/BeforeAfterPage';
 import ClinicDashboardPage from '@/pages/ClinicDashboardPage';
 import HomePage from '@/pages/HomePage';
 import LoginPage from '@/pages/LoginPage';
@@ -141,6 +142,7 @@ function Routes() {
     <RoutedErrorBoundary>
       <Switch>
         <Route path="/" component={HomePage} />
+        <Route path="/before-after" component={BeforeAfterPage} />
         {/* "/*?" matches the bare URL and Clerk's sub-paths (OAuth, verification). */}
         <Route path="/sign-in/*?" component={SignInPage} />
         <Route path="/sign-up/*?" component={SignUpPage} />
