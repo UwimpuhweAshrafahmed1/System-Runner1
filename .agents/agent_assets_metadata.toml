@@ -1,0 +1,16 @@
+uploads = []
+generated = []
+
+[[outputs]]
+id = "1OtTC2EBjjtdAFVcrcoHA"
+uri = "file://generated-artifacts/homepage-check/comparison-desktop.jpg"
+type = "image"
+title = "Homepage vs reference (desktop)"
+description = "Your reference image on the left, the rebuilt homepage at 1440px wide on the right."
+logical_id = "3eca14c8-069e-4d8f-ac39-cb8b34c5cb6e"
+content_hash = "sha256:877e8cb4dc96eeea4717a481e88bdf5d607258b240796dd42a642e98b37688dc"
+size = 541567
+mtime_ms = 1791913526716
+storage_uri = "gcs://replit-rams-assets-sisko/rams/assets/repl:d6331462-caa3-4320-a2fc-d249fac1423b/3eca14c8-069e-4d8f-ac39-cb8b34c5cb6e/002b4ee9-7541-471a-90df-c24c1b0e6f5d"
+storage_version_token = "1791913624575015"
+content_type = "image/jpeg"

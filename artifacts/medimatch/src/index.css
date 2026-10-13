@@ -6,6 +6,7 @@
 @import '@clerk/themes/shadcn.css';
 @import './styles/medimatch.css';
 @import './styles/additions.css';
+@import './styles/home.css';
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));

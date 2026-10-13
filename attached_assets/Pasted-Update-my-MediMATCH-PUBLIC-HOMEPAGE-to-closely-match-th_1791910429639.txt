@@ -1,0 +1,115 @@
+Update my MediMATCH PUBLIC HOMEPAGE to closely match the attached design image. Use the image as the visual reference for layout, colours, spacing, photography, cards, and typography.
+
+This is a homepage design update to my existing application. Preserve the working system and its functionality.
+
+BEFORE EDITING
+1. Inspect the project structure and identify the public homepage, shared components, styles, routes, and existing actions.
+2. Create a checkpoint so these changes can be rolled back.
+3. Identify which shared styles or components could affect other pages. Keep homepage changes scoped to avoid unintended changes elsewhere.
+
+PRESERVE THE EXISTING SYSTEM
+- Keep the existing technology stack and working backend.
+- Preserve authentication, registration, user roles, permissions, dashboards, CRM, appointments, forms, integrations, and existing routes.
+- Do not change database schemas, delete data, reset the database, or replace working services.
+- Keep existing URLs and connect homepage buttons to the correct existing destinations.
+- Keep internal dashboards and signed-in screens visually unchanged.
+- Do not replace configuration files or upgrade dependencies unless essential to this update.
+- Never remove functionality to make the design easier to implement.
+
+DESIGN TO IMPLEMENT
+Create the public-facing homepage shown in the attached image.
+
+Colours:
+- Deep navy: #072F69
+- Royal blue and light cyan: #79D4EF
+- Deep orange: #C64B12
+- Rich red: #C9343E
+- Emerald green: #087F5B
+- Golden yellow: #F5C542
+- White and very light blue backgrounds
+
+Keep navy and blue as the foundation. Use orange for primary actions, green/red/yellow for coordinated accents and treatment cards. Use readable contrast, especially dark text on yellow.
+
+HOMEPAGE SECTIONS, IN ORDER
+
+1. Slim navy utility bar
+International patient support and the existing language selector, if available.
+
+2. White navigation header
+Preserve the MediMATCH logo.
+Include Treatments, Doctors & hospitals, How it works, About us, and Contact where those destinations exist.
+Keep Sign in connected to existing authentication.
+Add a prominent orange “Plan my care” button linked to the existing inquiry or consultation flow.
+Include the thin orange, green, red, and yellow accent strip shown in the reference.
+
+3. Hero section
+Two-column desktop layout:
+- Left: navy/blue background with a subtle orange accent.
+- Headline: “For a healthier tomorrow.”
+- White headline with cyan “tomorrow.” and a yellow underline.
+- Supporting text explaining treatment discovery and care coordination.
+- Orange “Explore treatments” button.
+- Secondary “Talk to a care coordinator” button.
+- Right: warm, professional clinician-and-patient photography.
+- Overlay card with Consultation, Travel, and Aftercare icons.
+
+Use existing approved assets or suitable licensed assets. Do not embed the entire reference screenshot as the webpage.
+
+4. Care search
+White elevated search panel with treatment/specialty, destination, preferred language, and orange “Find care” action.
+Connect to existing search/filter functionality.
+If this capability does not exist, provide an honest consultation-request alternative; do not simulate search results.
+
+5. Quick actions
+Find a doctor, Find a hospital, Get a second opinion, Request a callback.
+Use orange, green, red, and yellow icon accents.
+Reuse existing working flows.
+
+6. Treatment cards
+Dental care, Hair restoration, Eye care, and Orthopedics, provided these are actual supported services.
+Use the reference’s photography, rounded cards, tinted backgrounds, coloured icons, and “Explore options” links.
+Use actual service information. Do not invent prices, outcomes, or offerings.
+
+7. Patient journey
+Four clearly numbered steps:
+01 Tell us what you need
+02 Review your care options
+03 Plan your visit
+04 Stay supported
+Use the reference’s orange, green, red, and yellow accents.
+
+8. Travel and patient support
+Destination photograph beside:
+“More than treatment. Support along the way.”
+Describe actual available travel, accommodation, language, appointment, and follow-up support.
+
+9. Consultation banner
+Deep orange-to-red background.
+“Let’s plan your next step, together.”
+Golden yellow “Request a consultation” button connected to the existing consultation flow.
+
+10. Footer
+Preserve working contact, privacy, terms, and social links.
+Keep one support/chat button connected to the existing support channel.
+
+IMPLEMENTATION REQUIREMENTS
+- Build real responsive components, not a screenshot or static imitation.
+- Match the reference closely on desktop, and adapt it cleanly for tablet and mobile.
+- Use scoped homepage styles; avoid broad CSS changes that alter the CRM or authentication pages.
+- Reuse existing components where safe.
+- Preserve form validation, loading states, error handling, and success feedback.
+- Keep keyboard navigation, visible focus states, readable text, and reduced-motion support.
+- Optimise images and avoid unnecessary libraries.
+- Do not add fake ratings, testimonials, accreditations, patient counts, or unsupported medical claims.
+- Never make an inactive button look functional or show success when nothing was submitted.
+
+VERIFY BEFORE FINISHING
+1. Run the existing relevant checks and production build.
+2. Start the app and inspect the actual homepage in the browser.
+3. Compare it with the attached reference at desktop and mobile widths.
+4. Test navigation, treatment links, search or inquiry flow, consultation requests, and support actions.
+5. Verify that sign-in and role-based access still work, and check existing CRM/dashboard and appointment flows for regressions using safe test data.
+6. Inspect console and server errors, and fix errors introduced by the changes.
+7. Do not publish to production as part of this task.
+
+Implement the update, rather than only describing a plan. Finish with a concise list of changed files, what was tested, and any remaining limitations. Clearly distinguish verified behaviour from anything you could not test.

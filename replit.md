@@ -26,6 +26,8 @@ MediMATCH is a connected-care website where patients book appointments with care
 - `artifacts/medimatch/design-reference/` — the user's original uploaded app (App.tsx, index.css, pages). Treat it as the design source of truth.
 - `artifacts/medimatch/src/App.tsx` — routes and Clerk setup; pages in `src/pages/`
 - `artifacts/medimatch/src/styles/medimatch.css` — the original styles; `additions.css` — new styles, imported after it
+- Public homepage: `src/pages/HomePage.tsx` + `src/components/home/`, styled only by `src/styles/home.css` (every rule scoped under `.mmh`, so other pages are unaffected); photos are WebP in `public/medimatch/home/`
+- `artifacts/medimatch/src/lib/treatments.ts` — the treatment list shared by the homepage links and the booking page select
 - `artifacts/medimatch/src/lib/account.ts` — signed-in account state and role → workspace mapping
 - `lib/api-spec/openapi.yaml` — API contract; `lib/db/src/schema/medimatch.ts` — DB schema
 - `artifacts/api-server/src/routes/medimatch.ts` — all MediMATCH API routes and permission checks
@@ -36,6 +38,7 @@ MediMATCH is a connected-care website where patients book appointments with care
 - The Clerk session token here carries only the user id, so the API reads name and email from the Clerk Backend API when it first creates an account, then refreshes them at most hourly from `/api/auth/me`.
 - Booking slots are generated in the browser (30 minutes, weekdays 09:00–17:00 UTC). The database enforces one active booking per provider and time through a partial unique index, and the API returns 409 when a slot is taken.
 - Clerk is cookie-based (no bearer tokens) and styled through `appearance` in `App.tsx`, never through `.cl-*` CSS selectors.
+- There is no live provider search. The homepage care search opens `/appointments?treatment=&destination=&language=`; the booking page preselects the treatment and puts destination and language in the coordinator notes.
 
 ## Product
 

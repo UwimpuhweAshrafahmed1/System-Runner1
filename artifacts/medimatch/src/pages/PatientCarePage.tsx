@@ -29,6 +29,7 @@ import {
 } from "@workspace/api-client-react";
 import { apiErrorMessage } from "@/lib/api-errors";
 import { useMediMatchAccount, useSignOut, useStartSignIn } from "@/lib/account";
+import { careTreatments, carePreferencesNote, treatmentBySlug } from "@/lib/treatments";
 import {
   addDays,
   channelLabel,
@@ -111,13 +112,19 @@ export default function PatientCarePage() {
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const intent = new URLSearchParams(window.location.search).get("intent");
+    const params = new URLSearchParams(window.location.search);
+    const intent = params.get("intent");
     if (intent === "second-opinion") {
       setTreatmentName("Second opinion");
       setRecommendationMode(true);
     } else if (intent === "facility") {
       setRecommendationMode(true);
     }
+    // Choices made on the homepage (treatment, destination, language).
+    const treatment = treatmentBySlug(params.get("treatment"));
+    if (treatment) setTreatmentName(treatment.name);
+    const preferences = carePreferencesNote(params);
+    if (preferences) setReason(preferences);
   }, []);
 
   useEffect(() => {
@@ -478,13 +485,9 @@ export default function PatientCarePage() {
             <label className="care-field">
               <span>Treatment or care request</span>
               <select value={treatmentName} onChange={(event) => setTreatmentName(event.target.value)}>
-                <option>General consultation</option>
-                <option>Dental treatment</option>
-                <option>Hair restoration</option>
-                <option>Skin and aesthetics</option>
-                <option>Orthopaedic care</option>
-                <option>Women’s health</option>
-                <option>Second opinion</option>
+                {careTreatments.map((treatment) => (
+                  <option key={treatment.slug}>{treatment.name}</option>
+                ))}
               </select>
             </label>
             <div className="care-field-row">

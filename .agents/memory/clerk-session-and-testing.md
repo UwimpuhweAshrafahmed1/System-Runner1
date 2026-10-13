@@ -14,4 +14,5 @@ Find the user's active session with Clerk Backend API `GET /v1/sessions?user_id=
 ## UI test plans
 Clerk takes several seconds to load on each full page load in development. Assertions about redirects after sign-in (for example `/login` → workspace) must wait up to about 15 seconds, or the tester reports a false failure.
 Emails are stored lowercased, so DB checks should compare with `lower(...)`.
+For skip-link or first-Tab checks, tell the tester to press Tab straight after page load. Clicking the page first moves the browser's focus starting point, so the next Tab skips the skip link and the tester reports a false failure.
 Delete test users afterwards from both `medimatch_users` (appointments cascade) and Clerk, so they do not show up in the CEO team-access panel.
