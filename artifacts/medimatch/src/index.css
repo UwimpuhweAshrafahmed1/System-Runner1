@@ -1,6 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap');
+/* The clerk layer sits between base and components so the sign-in UI can be
+ * themed with Tailwind classes while utilities still win. */
+@layer theme, base, clerk, components, utilities;
 @import 'tailwindcss';
 @import 'tw-animate-css';
+@import '@clerk/themes/shadcn.css';
+@import './styles/medimatch.css';
+@import './styles/additions.css';
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -32,7 +37,7 @@
   --color-muted-foreground: hsl(var(--muted-foreground));
   --color-muted-border: var(--muted-border);
 
-  --color-accent: hsl(var(--accent));
+  --color-accent: hsl(var(--ui-accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
   --color-accent-border: var(--accent-border);
 
@@ -79,11 +84,11 @@
   --elevate-1: rgba(0, 0, 0, 0.03);
   --elevate-2: rgba(0, 0, 0, 0.08);
 
-  --background: 225 38% 97%;
-  --foreground: 225 45% 18%;
+  --background: 228 33% 97%;
+  --foreground: 216 100% 22%;
   --border: 223 24% 88%;
   --card: 0 0% 100%;
-  --card-foreground: 225 45% 18%;
+  --card-foreground: 216 100% 22%;
   --card-border: 223 24% 90%;
   --sidebar: 225 43% 17%;
   --sidebar-foreground: 220 30% 94%;
@@ -94,27 +99,28 @@
   --sidebar-accent-foreground: 220 30% 96%;
   --sidebar-ring: 207 89% 56%;
   --popover: 0 0% 100%;
-  --popover-foreground: 225 45% 18%;
+  --popover-foreground: 216 100% 22%;
   --popover-border: 223 24% 90%;
-  --primary: 207 89% 45%;
+  --primary: 210 90% 40%;
   --primary-foreground: 0 0% 100%;
   --secondary: 210 42% 93%;
   --secondary-foreground: 225 45% 22%;
   --muted: 220 27% 94%;
   --muted-foreground: 222 15% 48%;
-  --accent: 31 88% 62%;
+  /* Renamed from --accent: the MediMATCH stylesheet uses --accent as a full colour. */
+  --ui-accent: 31 88% 62%;
   --accent-foreground: 225 45% 18%;
   --destructive: 0 68% 55%;
   --destructive-foreground: 0 0% 100%;
   --input: 223 24% 88%;
-  --ring: 207 89% 56%;
+  --ring: 210 90% 40%;
   --chart-1: 207 89% 56%;
   --chart-2: 149 42% 51%;
   --chart-3: 31 88% 62%;
   --chart-4: 265 38% 67%;
   --chart-5: 0 68% 62%;
-  --app-font-sans: 'DM Sans', sans-serif;
-  --app-font-serif: 'Manrope', sans-serif;
+  --app-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --app-font-serif: Georgia, serif;
   --app-font-mono: 'SFMono-Regular', Consolas, monospace;
   --radius: 0.5rem; /* 8px */
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0); /*replace with H S L */
@@ -176,9 +182,9 @@
   );
 
   /* Fallback for older browsers */
-  --accent-border: hsl(var(--accent));
+  --accent-border: hsl(var(--ui-accent));
   --accent-border: hsl(
-    from hsl(var(--accent)) h s
+    from hsl(var(--ui-accent)) h s
       calc(l + var(--opaque-button-border-intensity)) / alpha
   );
 
@@ -223,7 +229,7 @@
   --secondary-foreground: 220 28% 94%;
   --muted: 225 28% 20%;
   --muted-foreground: 220 16% 68%;
-  --accent: 31 78% 58%;
+  --ui-accent: 31 78% 58%;
   --accent-foreground: 225 45% 12%;
   --destructive: 0 63% 55%;
   --destructive-foreground: 0 0% 100%;

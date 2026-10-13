@@ -1,0 +1,59 @@
+/* Styles for features added on top of the original MediMATCH design
+ * (sign-in pages, sign out, team access, care desk request details).
+ * Same palette and type scale as medimatch.css. */
+
+/* Sign-in and sign-up pages */
+.auth-clerk-slot { display: flex; flex-direction: column; align-items: center; gap: 16px; min-width: 0; }
+.auth-clerk-slot__note { display: inline-flex; align-items: center; gap: 7px; max-width: 440px; margin: 0; color: #6f8295; font-size: 11px; font-weight: 700; line-height: 1.45; }
+.auth-clerk-slot__note svg { flex: none; color: #0a66c2; }
+
+/* Sign out in workspace top bars */
+.workspace-signout { display: inline-flex; align-items: center; gap: 6px; margin-left: 4px; padding: 8px 11px; border: 1px solid #dae6ef; border-radius: 8px; background: white; color: #0a66c2; font-size: 10px; font-weight: 850; cursor: pointer; white-space: nowrap; }
+.workspace-signout:hover { border-color: #0a66c2; background: #eaf3ff; }
+
+/* Sign out in the care portal header */
+.care-signout { display: inline-flex; align-items: center; gap: 6px; padding: 9px 12px; border: 1px solid #dae6ef; border-radius: 7px; background: white; color: #0a66c2; font-size: 11px; font-weight: 850; cursor: pointer; white-space: nowrap; }
+.care-signout:hover { border-color: #0a66c2; background: #eaf3ff; }
+.workspace-signout:focus-visible, .care-signout:focus-visible { outline: 2px solid #0a66c2; outline-offset: 2px; }
+
+/* Retry button on the care desk access card (matches the card's link style) */
+.care-access-card button { display: inline-flex; align-items: center; gap: 7px; margin-left: auto; padding: 10px 13px; border: 0; border-radius: 7px; background: #eaf3ff; color: #0a66c2; font-size: 11px; font-weight: 900; cursor: pointer; }
+
+/* CEO pipeline with the five appointment statuses */
+.pipeline-strip--five { grid-template-columns: repeat(5,minmax(0,1fr)); }
+
+/* Team access (CEO workspace) */
+.workspace-panel--team { margin-top: 18px; }
+.team-access-intro { max-width: 640px; margin: 10px 0 0; color: #6f8295; font-size: 12px; line-height: 1.5; }
+.team-access-list { display: grid; gap: 8px; margin-top: 18px; }
+.team-access-row { display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,1.7fr) auto; align-items: center; gap: 14px; padding: 13px 14px; border: 1px solid #e3ebf2; border-radius: 11px; background: #fbfdff; }
+.team-access-row__who { display: flex; align-items: center; gap: 11px; min-width: 0; }
+.team-access-row__avatar { display: grid; place-items: center; flex: none; width: 34px; height: 34px; border-radius: 50%; background: #eaf3ff; color: #0a66c2; font-size: 12px; font-weight: 900; }
+.team-access-row__who div { display: grid; min-width: 0; }
+.team-access-row__who strong { overflow: hidden; color: #002d71; font-size: 13px; text-overflow: ellipsis; white-space: nowrap; }
+.team-access-row__who span { overflow: hidden; color: #6f8295; font-size: 11px; text-overflow: ellipsis; white-space: nowrap; }
+.team-access-row__controls { display: flex; flex-wrap: wrap; gap: 8px; min-width: 0; }
+.team-access-row select { flex: 1 1 140px; min-width: 0; padding: 9px 10px; border: 1px solid #dce6ef; border-radius: 8px; background: white; color: #002d71; font-size: 11px; font-weight: 750; }
+.team-access-row select:disabled { background: #f3f6f9; color: #8a9bb0; }
+.team-access-row button { padding: 9px 14px; border: 0; border-radius: 8px; background: #0a66c2; color: white; font-size: 11px; font-weight: 850; cursor: pointer; white-space: nowrap; }
+.team-access-row button:hover:not(:disabled) { background: #002d71; }
+.team-access-row button:disabled { background: #c9d6e2; cursor: not-allowed; }
+.team-access-row__self { color: #6f8295; font-size: 10px; font-weight: 850; letter-spacing: .06em; text-transform: uppercase; }
+
+/* Care desk: request details for the selected appointment */
+.staff-request-details { display: grid; margin: 18px 0 0; overflow: hidden; border: 1px solid #e3ebf2; border-radius: 10px; }
+.staff-request-details div { display: grid; grid-template-columns: 130px 1fr; gap: 12px; padding: 10px 13px; border-top: 1px solid #edf2f7; font-size: 11px; }
+.staff-request-details div:first-child { border-top: 0; }
+.staff-request-details dt { color: #7a8c9e; font-weight: 800; }
+.staff-request-details dd { margin: 0; color: #002d71; font-weight: 700; overflow-wrap: anywhere; white-space: pre-wrap; }
+.staff-request-details a { color: #0a66c2; }
+.staff-coming-later { display: flex; align-items: flex-start; gap: 9px; margin-top: 14px; padding: 12px 13px; border-radius: 9px; background: #f6f9fc; color: #687d91; font-size: 11px; line-height: 1.45; }
+.staff-coming-later svg { flex: none; margin-top: 1px; color: #0a66c2; }
+
+@media (max-width: 760px) {
+  .workspace-signout { padding: 8px; }
+  .workspace-signout span { display: none; }
+  .pipeline-strip--five { grid-template-columns: repeat(3,1fr); }
+  .team-access-row { grid-template-columns: 1fr; }
+  .staff-request-details div { grid-template-columns: 1fr; gap: 3px; }
+}

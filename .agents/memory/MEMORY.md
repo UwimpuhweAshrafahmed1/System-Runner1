@@ -1,0 +1,1 @@
+- [Clerk session claims and signed-in testing](clerk-session-and-testing.md) — session JWT has no email/name here; use Backend API. How to test signed-in API calls and time UI tests.

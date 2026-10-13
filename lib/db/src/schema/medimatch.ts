@@ -8,6 +8,7 @@ import {
   timestamp,
   uniqueIndex,
 } from "drizzle-orm/pg-core";
+import { sql } from "drizzle-orm";
 
 export const accountTypeEnum = pgEnum("medimatch_account_type", [
   "patient",
@@ -122,10 +123,10 @@ export const appointmentsTable = pgTable(
       .$onUpdate(() => new Date()),
   },
   (table) => ({
-    providerSlotUnique: uniqueIndex("medimatch_provider_slot_uq").on(
-      table.providerId,
-      table.startsAt,
-    ),
+    // Cancelled appointments release their slot so it can be booked again.
+    providerSlotUnique: uniqueIndex("medimatch_provider_slot_uq")
+      .on(table.providerId, table.startsAt)
+      .where(sql`${table.status} <> 'cancelled'`),
     patientDateIndex: index("medimatch_patient_date_idx").on(
       table.patientUserId,
       table.startsAt,
