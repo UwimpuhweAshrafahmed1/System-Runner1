@@ -18,3 +18,11 @@ expertMode = true
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[userenv]
+
+[userenv.shared]
+MEDIMATCH_ADMIN_EMAIL = "pinpointendge@gmail.com"
+
+[nix]
+channel = "stable-25_05"

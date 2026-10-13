@@ -10,6 +10,8 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: medimatch
+    description: MediMATCH care coordination
 paths:
   /healthz:
     get:
@@ -24,6 +26,154 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /auth/me:
+    get:
+      operationId: getCurrentAccount
+      tags: [medimatch]
+      summary: Get the signed-in MediMATCH account
+      responses:
+        "200":
+          description: Account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        "401":
+          description: Sign in required
+  /providers:
+    get:
+      operationId: listProviders
+      tags: [medimatch]
+      summary: List available care providers
+      responses:
+        "200":
+          description: Available providers
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Provider"
+  /dashboard:
+    get:
+      operationId: getDashboard
+      tags: [medimatch]
+      summary: Get the workspace data available to the signed-in account
+      responses:
+        "200":
+          description: Role-scoped dashboard
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Dashboard"
+        "401":
+          description: Sign in required
+        "403":
+          description: The account does not have workspace access
+  /appointments:
+    post:
+      operationId: createAppointment
+      tags: [medimatch]
+      summary: Book a care appointment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentInput"
+      responses:
+        "201":
+          description: Appointment created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "400":
+          description: Invalid appointment details
+        "401":
+          description: Sign in required
+        "409":
+          description: The selected appointment slot is unavailable
+  /appointments/{appointmentId}/status:
+    patch:
+      operationId: updateAppointmentStatus
+      tags: [medimatch]
+      summary: Update an appointment status from an authorized workspace
+      parameters:
+        - name: appointmentId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AppointmentStatusInput"
+      responses:
+        "200":
+          description: Updated appointment
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Appointment"
+        "401":
+          description: Sign in required
+        "403":
+          description: Clinic or administrator access required
+        "404":
+          description: Appointment not found
+  /staff:
+    get:
+      operationId: listStaffAccounts
+      tags: [medimatch]
+      summary: List accounts for access management
+      responses:
+        "200":
+          description: Accounts
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Account"
+        "401":
+          description: Sign in required
+        "403":
+          description: Administrator access required
+  /staff/{userId}/access:
+    patch:
+      operationId: updateStaffAccess
+      tags: [medimatch]
+      summary: Assign a role and optional clinic to an existing account
+      parameters:
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/StaffAccessInput"
+      responses:
+        "200":
+          description: Updated account
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Account"
+        "401":
+          description: Sign in required
+        "403":
+          description: Administrator access required
+        "404":
+          description: Account not found
 components:
   schemas:
     HealthStatus:
@@ -33,4 +183,101 @@ components:
           type: string
       required:
         - status
+    Account:
+      type: object
+      required: [id, name, email, accountType, clinicId]
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        email: { type: string }
+        accountType: { type: string, enum: [patient, clinic, partner, admin] }
+        clinicId: { type: [integer, "null"] }
+    Clinic:
+      type: object
+      required: [id, name, city, country]
+      properties:
+        id: { type: integer }
+        name: { type: string }
+        city: { type: string }
+        country: { type: string }
+    Provider:
+      type: object
+      required: [id, clinicId, name, specialty, facility, city, bio, languages]
+      properties:
+        id: { type: integer }
+        clinicId: { type: [integer, "null"] }
+        name: { type: string }
+        specialty: { type: string }
+        facility: { type: string }
+        city: { type: string }
+        bio: { type: string }
+        languages: { type: string }
+    Appointment:
+      type: object
+      required: [id, providerId, clinicId, startsAt, endsAt, channel, status, treatmentName, patientName, patientEmail, phone, country, reason]
+      properties:
+        id: { type: integer }
+        providerId: { type: integer }
+        clinicId: { type: [integer, "null"] }
+        startsAt: { type: string, format: date-time }
+        endsAt: { type: string, format: date-time }
+        channel: { type: string, enum: [video, phone, in_person] }
+        status: { type: string, enum: [pending, confirmed, checked_in, completed, cancelled] }
+        treatmentName: { type: string }
+        patientName: { type: string }
+        patientEmail: { type: string }
+        phone: { type: [string, "null"] }
+        country: { type: [string, "null"] }
+        reason: { type: [string, "null"] }
+    AppointmentInput:
+      type: object
+      required: [providerId, startsAt, channel, treatmentName, patientName, patientEmail]
+      properties:
+        providerId: { type: integer, minimum: 1 }
+        startsAt: { type: string, format: date-time }
+        channel: { type: string, enum: [video, phone, in_person] }
+        treatmentName: { type: string, minLength: 2, maxLength: 180 }
+        patientName: { type: string, minLength: 2, maxLength: 180 }
+        patientEmail: { type: string, format: email }
+        phone: { type: [string, "null"], maxLength: 40 }
+        country: { type: [string, "null"], maxLength: 100 }
+        reason: { type: [string, "null"], maxLength: 1000 }
+    AppointmentStatusInput:
+      type: object
+      required: [status]
+      properties:
+        status: { type: string, enum: [pending, confirmed, checked_in, completed, cancelled] }
+    StaffAccessInput:
+      type: object
+      required: [accountType]
+      properties:
+        accountType: { type: string, enum: [patient, clinic, partner, admin] }
+        clinicId: { type: [integer, "null"], minimum: 1 }
+    DashboardCounts:
+      type: object
+      required: [appointments, pending, clinics, providers, staff]
+      properties:
+        appointments: { type: integer }
+        pending: { type: integer }
+        clinics: { type: integer }
+        providers: { type: integer }
+        staff: { type: integer }
+    Dashboard:
+      type: object
+      required: [account, counts, appointments, clinics, providers, staff]
+      properties:
+        account: { $ref: "#/components/schemas/Account" }
+        counts: { $ref: "#/components/schemas/DashboardCounts" }
+        appointments:
+          type: array
+          items: { $ref: "#/components/schemas/Appointment" }
+        clinics:
+          type: array
+          items: { $ref: "#/components/schemas/Clinic" }
+        providers:
+          type: array
+          items: { $ref: "#/components/schemas/Provider" }
+        staff:
+          type: array
+          items: { $ref: "#/components/schemas/Account" }
 

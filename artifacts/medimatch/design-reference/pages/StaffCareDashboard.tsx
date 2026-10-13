@@ -1,0 +1,57 @@
+import { useEffect, useMemo, useState } from "react";
+import { Link } from "wouter";
+import { ArrowLeft, Bell, CheckCircle2, Clock3, FileText, HeartHandshake, LogIn, Mail, MessageCircle, MessageSquare, Save, ShieldCheck, Stethoscope, UserRound, Video, X } from "lucide-react";
+import { startLogin } from "@/const";
+import { useAuth } from "@/_core/hooks/useAuth";
+import { trpc } from "@/lib/trpc";
+import { useAppointmentLiveRefresh } from "./careLive";
+
+function formatDate(value: string | Date) { return new Date(value).toLocaleDateString(undefined, { weekday: "short", month: "short", day: "numeric", timeZone: "UTC" }); }
+function formatTime(value: string | Date) { return new Date(value).toLocaleTimeString(undefined, { hour: "numeric", minute: "2-digit", timeZone: "UTC" }); }
+function statusLabel(status: string) { return status.replace("_", " ").replace(/\b\w/g, letter => letter.toUpperCase()); }
+function statusTone(status: string) { return status === "confirmed" ? "confirmed" : status === "completed" ? "completed" : status === "cancelled" ? "cancelled" : status === "checked_in" ? "checked-in" : "pending"; }
+
+export default function StaffCareDashboard() {
+  const auth = useAuth();
+  const isStaff = auth.user?.accountType === "admin" || auth.user?.role === "admin";
+  const liveStatus = useAppointmentLiveRefresh(Boolean(isStaff));
+  const queueQuery = trpc.care.staffQueue.useQuery(undefined, { enabled: isStaff, refetchInterval: 12_000 });
+  const notificationStatusQuery = trpc.notifications.status.useQuery(undefined, { enabled: isStaff, refetchInterval: 30_000 });
+  const updateStatus = trpc.care.updateStatus.useMutation({ onSuccess: () => { setError(null); queueQuery.refetch(); }, onError: error => setError(error.message) });
+  const saveConsultation = trpc.care.saveConsultation.useMutation({ onSuccess: () => queueQuery.refetch(), onError: error => setError(error.message) });
+  const [statusFilter, setStatusFilter] = useState("all");
+  const [selectedId, setSelectedId] = useState<number | null>(null);
+  const [patientSummary, setPatientSummary] = useState("");
+  const [nextSteps, setNextSteps] = useState("");
+  const [internalNotes, setInternalNotes] = useState("");
+  const [consultationStatus, setConsultationStatus] = useState<"not_started" | "in_progress" | "completed">("not_started");
+  const [notice, setNotice] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+
+  const filtered = useMemo(() => (queueQuery.data ?? []).filter(row => statusFilter === "all" || row.appointment.status === statusFilter), [queueQuery.data, statusFilter]);
+  const selected = queueQuery.data?.find(row => row.appointment.id === selectedId) ?? filtered[0] ?? null;
+  useEffect(() => {
+    if (!selected) return;
+    setSelectedId(selected.appointment.id);
+    setPatientSummary(selected.consultation?.patientSummary ?? "");
+    setNextSteps(selected.consultation?.nextSteps ?? "");
+    setInternalNotes(selected.consultation?.internalNotes ?? "");
+    setConsultationStatus(selected.consultation?.status ?? "not_started");
+  }, [selected]);
+
+  const handleSave = () => {
+    if (!selected) return;
+    saveConsultation.mutate({ appointmentId: selected.appointment.id, status: consultationStatus, patientSummary: patientSummary.trim() || undefined, nextSteps: nextSteps.trim() || undefined, internalNotes: internalNotes.trim() || undefined }, { onSuccess: () => setNotice("Consultation record saved and the patient timeline was updated.") });
+  };
+
+  if (auth.loading) return <div className="care-portal care-portal--loading"><div className="care-loading">Checking staff access…</div></div>;
+  if (!auth.isAuthenticated) return <div className="care-portal care-portal--loading"><div className="care-login-card"><LogIn size={22} /><div><strong>Sign in to open the staff care desk.</strong><span>Staff access is protected by MediMATCH account login.</span></div><button onClick={startLogin}>Sign in</button></div></div>;
+  if (!isStaff) return <div className="care-portal care-portal--loading"><div className="care-access-card"><ShieldCheck size={25} /><h1>Staff access required</h1><p>Your account is signed in, but it is not assigned to the MediMATCH staff role. Patient booking remains available.</p><Link href="/appointments">Go to patient appointments <ArrowLeft size={15} /></Link></div></div>;
+
+  const reminderStatus = notificationStatusQuery.data;
+  return <div className="care-portal care-portal--staff"><div className="care-utility"><span><ShieldCheck size={13} /> Staff care desk</span><span><Clock3 size={13} /> Live queue monitoring</span><span className="care-utility__right">{auth.user?.name || "MediMATCH staff"}</span></div><header className="care-header"><Link href="/" className="care-brand"><span className="care-brand__mark"><HeartHandshake size={19} /></span><span><strong>MediMATCH</strong><small>Care operations</small></span></Link><nav><Link href="/appointments">Patient portal</Link><Link className="is-active" href="/care-dashboard">Care desk</Link></nav><div className={`care-connection care-connection--${liveStatus}`}><i /> {liveStatus === "live" ? "Live queue" : "Polling fallback"}</div></header><main className="staff-main"><div className="staff-heading"><div><span className="care-eyebrow">MediMATCH operations</span><h1>Care desk.</h1><p>Keep the next patient conversation clear, timely, and documented.</p></div><div className="staff-heading__meta"><span className="care-status care-status--confirmed"><i /> {filtered.length} in view</span><span>Updated automatically</span></div></div><div className="staff-notification-status"><div><span className="care-eyebrow"><Bell size={14} /> Reminder system</span><strong>{reminderStatus?.scheduleRegistered ? "Scheduled reminders are active" : "Reminder schedule is not registered yet"}</strong><span>Patient and staff reminders run idempotently every five minutes.</span></div><div className="staff-notification-status__chips"><span className={reminderStatus?.emailConfigured ? "is-ready" : "is-pending"}><Mail size={14} /> Email {reminderStatus?.emailConfigured ? "ready" : "needs setup"}</span><span className={reminderStatus?.smsConfigured ? "is-ready" : "is-pending"}><MessageCircle size={14} /> SMS {reminderStatus?.smsConfigured ? "ready" : "needs setup"}</span></div></div><div className="staff-toolbar"><div className="care-filter-tabs">{[["all", "All"], ["pending", "Pending"], ["confirmed", "Confirmed"], ["checked_in", "Checked in"], ["completed", "Completed"]].map(([value, label]) => <button key={value} className={statusFilter === value ? "is-active" : ""} onClick={() => setStatusFilter(value)}>{label}</button>)}</div><Link href="/appointments" className="staff-back-link">Patient portal <ArrowLeft size={15} /></Link></div><div className="staff-grid"><section className="care-panel staff-queue-panel"><div className="care-panel__head"><div><span className="care-eyebrow">Appointment queue</span><h2>Today and next up.</h2></div><span className="care-timezone">UTC</span></div>{queueQuery.isLoading ? <div className="care-loading">Loading live queue…</div> : queueQuery.error ? <div className="care-error">Unable to load the staff queue.</div> : filtered.length ? <div className="staff-queue">{filtered.map(row => <button key={row.appointment.id} className={`staff-queue-item ${selected?.appointment.id === row.appointment.id ? "is-selected" : ""}`} onClick={() => setSelectedId(row.appointment.id)}><div className="staff-queue-item__time"><strong>{formatTime(row.appointment.startsAt)}</strong><span>{formatDate(row.appointment.startsAt)}</span></div><div className="staff-queue-item__patient"><strong>{row.patient.name || row.patient.email || "Patient"}</strong><span>{row.provider.name} · {row.appointment.channel === "video" ? "Video" : row.appointment.channel === "phone" ? "Phone" : "In person"}</span></div><span className={`care-status care-status--${statusTone(row.appointment.status)}`}>{statusLabel(row.appointment.status)}</span></button>)}</div> : <div className="care-empty care-empty--wide"><CalendarIcon /><strong>No appointments in this view.</strong><span>New patient bookings will appear here in real time.</span></div>}</section><aside className="care-panel staff-detail-panel">{selected ? <><div className="care-panel__head"><div><span className="care-eyebrow">Selected appointment</span><h2>{selected.patient.name || selected.patient.email || "Patient"}</h2></div><span className="staff-patient-avatar"><UserRound size={18} /></span></div><div className="staff-detail-meta"><span><CalendarIcon /> {formatDate(selected.appointment.startsAt)} · {formatTime(selected.appointment.startsAt)}</span><span><Stethoscope size={15} /> {selected.provider.name} · {selected.provider.specialty}</span><span>{selected.appointment.channel === "video" ? <Video size={15} /> : <PhoneIcon />} {selected.appointment.channel === "video" ? "Video consultation" : selected.appointment.channel === "phone" ? "Phone consultation" : "In-person appointment"}</span></div><div className="staff-status-actions"><span className="care-eyebrow">Appointment status</span><div>{["pending", "confirmed", "checked_in", "completed", "cancelled"].map(status => <button key={status} className={selected.appointment.status === status ? "is-active" : ""} onClick={() => updateStatus.mutate({ appointmentId: selected.appointment.id, status: status as "pending" | "confirmed" | "checked_in" | "completed" | "cancelled" })}>{statusLabel(status)}</button>)}</div></div><div className="care-note-fields"><label className="care-field"><span>Consultation record</span><select value={consultationStatus} onChange={event => setConsultationStatus(event.target.value as typeof consultationStatus)}><option value="not_started">Not started</option><option value="in_progress">In progress</option><option value="completed">Completed</option></select></label><label className="care-field"><span>Patient-facing summary</span><textarea value={patientSummary} onChange={event => setPatientSummary(event.target.value)} placeholder="A clear, reassuring summary the patient can read." /></label><label className="care-field"><span>Next steps</span><textarea value={nextSteps} onChange={event => setNextSteps(event.target.value)} placeholder="Follow-up, preparation, or referral steps." /></label><label className="care-field care-field--internal"><span><MessageSquare size={14} /> Internal staff notes</span><textarea value={internalNotes} onChange={event => setInternalNotes(event.target.value)} placeholder="Visible to staff only." /></label></div>{error && <div className="care-alert care-alert--error" role="alert"><X size={16} /> {error}</div>}{notice && <div className="care-alert care-alert--success" role="status"><CheckCircle2 size={16} /> {notice}</div>}<button className="care-primary-button" disabled={saveConsultation.isPending} onClick={handleSave}><Save size={16} /> {saveConsultation.isPending ? "Saving…" : "Save consultation record"}</button></> : <div className="care-empty"><FileText size={24} /><strong>Select an appointment.</strong><span>Its care details will appear here.</span></div>}</aside></div></main></div>;
+}
+
+function CalendarIcon() { return <CalendarDaysFallback />; }
+function CalendarDaysFallback() { return <span className="staff-inline-icon"><Clock3 size={15} /></span>; }
+function PhoneIcon() { return <span className="staff-inline-icon"><Stethoscope size={15} /></span>; }
