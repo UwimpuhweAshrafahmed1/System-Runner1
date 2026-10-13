@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "MediMATCH"
+description = "A care coordination platform for patients, clinics, care partners, and network administrators. Patients can find providers and request appointments, while staff manage care requests in role-appropriate workspaces."
+version = "1.0.0"
+id = "artifacts/medimatch"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 25773
+
+[services.development]
+run = "pnpm --filter @workspace/medimatch run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/medimatch", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/medimatch/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "25773"
+BASE_PATH = "/"
