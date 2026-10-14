@@ -1,0 +1,58 @@
+# CRITICAL INSTRUCTION: DO NOT REPLACE MY EXISTING WEBSITE
+
+**MediMATCH is already an existing website, and I am NOT asking you to turn the entire website into a CRM.**
+
+The CRM system must be **ADDED as an additional feature inside my existing website**, specifically connected to the existing login and workspace selection system shown in the screenshot.
+
+My existing website, including its homepage, public pages, branding, navigation, design, content, and current functionality, must remain completely unchanged.
+
+### HOW IT SHOULD WORK
+
+When visitors access MediMATCH, they should continue seeing the existing public website as usual.
+
+Only when a user clicks **Login / Sign In** should they enter the existing workspace selection page with these four options:
+
+1. **CEO Workspace:** Full business management and administration CRM.
+2. **Employee Workspace:** Sales, leads, patients, communication, and coordination CRM.
+3. **Partner Workspace:** Clinic, hospital, hotel, transportation, and business partnership CRM.
+4. **Client Workspace:** Patient dashboard, clinic matching, consultations, bookings, and travel coordination.
+
+After authentication, each user should be redirected to their authorized workspace.
+
+### IMPORTANT DEVELOPMENT RULES
+
+- DO NOT redesign or replace the existing public website.
+- DO NOT turn the homepage into a CRM dashboard.
+- DO NOT remove or overwrite existing website features.
+- DO NOT change the existing MediMATCH branding.
+- PRESERVE the existing workspace selection design.
+- ADD the CRM modules behind the existing login system.
+- CONNECT all four workspaces to one secure backend and database.
+- KEEP the public website and internal CRM as separate application areas within the same MediMATCH platform.
+- USE the existing authentication system where possible, extending it with secure role-based permissions.
+- DO NOT modify unrelated pages or routes.
+- DO NOT change the existing database destructively.
+
+### REQUIRED STRUCTURE
+
+**Public Website:** Existing MediMATCH website, unchanged.
+
+**Login System:** Existing four-option workspace selection interface.
+
+**CEO CRM:** Accessible only to authorized CEO accounts.
+
+**Employee CRM:** Accessible only to authorized employees.
+
+**Partner CRM:** Accessible only to authorized partners.
+
+**Client Dashboard:** Accessible only to authorized patients.
+
+### FINAL REMINDER
+
+This is an **extension of my existing MediMATCH website, NOT a replacement or redesign**.
+
+Your task is to integrate advanced CRM functionality into the four existing login workspaces while preserving everything already built.
+
+Before implementing, identify the existing public routes, login routes, and application architecture. Explain exactly where the new CRM functionality will be connected.
+
+**Do not begin modifying the existing public website. Build the CRM as an additional authenticated module.**

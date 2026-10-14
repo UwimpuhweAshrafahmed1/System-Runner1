@@ -125,6 +125,39 @@ paths:
           description: Clinic or administrator access required
         "404":
           description: Appointment not found
+  /crm/leads/{leadId}/stage:
+    patch:
+      operationId: updateCrmLeadStage
+      tags: [medimatch]
+      summary: Move a CRM lead to another pipeline stage
+      parameters:
+        - name: leadId
+          in: path
+          required: true
+          schema:
+            type: integer
+            minimum: 1
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LeadStageInput"
+      responses:
+        "200":
+          description: Updated lead
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/CrmLead"
+        "400":
+          description: Invalid lead stage
+        "401":
+          description: Sign in required
+        "403":
+          description: Employee or CEO access required
+        "404":
+          description: Lead not found
   /staff:
     get:
       operationId: listStaffAccounts
@@ -247,6 +280,56 @@ components:
       required: [status]
       properties:
         status: { type: string, enum: [pending, confirmed, checked_in, completed, cancelled] }
+    CrmLead:
+      type: object
+      required: [id, appointmentId, stage, createdAt, updatedAt]
+      properties:
+        id: { type: integer }
+        appointmentId: { type: integer }
+        stage:
+          type: string
+          enum:
+            - new_inquiry
+            - contacted
+            - information_requested
+            - photos_received
+            - medical_evaluation_pending
+            - consultation_offered
+            - quotation_sent
+            - negotiation
+            - awaiting_deposit
+            - deposit_received
+            - confirmed_booking
+            - arriving_soon
+            - treatment_completed
+            - aftercare
+            - closed_won
+            - closed_lost
+        createdAt: { type: string, format: date-time }
+        updatedAt: { type: string, format: date-time }
+    LeadStageInput:
+      type: object
+      required: [stage]
+      properties:
+        stage:
+          type: string
+          enum:
+            - new_inquiry
+            - contacted
+            - information_requested
+            - photos_received
+            - medical_evaluation_pending
+            - consultation_offered
+            - quotation_sent
+            - negotiation
+            - awaiting_deposit
+            - deposit_received
+            - confirmed_booking
+            - arriving_soon
+            - treatment_completed
+            - aftercare
+            - closed_won
+            - closed_lost
     StaffAccessInput:
       type: object
       required: [accountType]
@@ -255,16 +338,17 @@ components:
         clinicId: { type: [integer, "null"], minimum: 1 }
     DashboardCounts:
       type: object
-      required: [appointments, pending, clinics, providers, staff]
+      required: [appointments, pending, clinics, providers, staff, leads]
       properties:
         appointments: { type: integer }
         pending: { type: integer }
         clinics: { type: integer }
         providers: { type: integer }
         staff: { type: integer }
+        leads: { type: integer }
     Dashboard:
       type: object
-      required: [account, counts, appointments, clinics, providers, staff]
+      required: [account, counts, appointments, clinics, providers, staff, leads]
       properties:
         account: { $ref: "#/components/schemas/Account" }
         counts: { $ref: "#/components/schemas/DashboardCounts" }
@@ -280,4 +364,7 @@ components:
         staff:
           type: array
           items: { $ref: "#/components/schemas/Account" }
+        leads:
+          type: array
+          items: { $ref: "#/components/schemas/CrmLead" }
 

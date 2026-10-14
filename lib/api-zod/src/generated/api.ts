@@ -61,7 +61,8 @@ export const GetDashboardResponse = zod.object({
   "pending": zod.number().int(),
   "clinics": zod.number().int(),
   "providers": zod.number().int(),
-  "staff": zod.number().int()
+  "staff": zod.number().int(),
+  "leads": zod.number().int()
 }),
   "appointments": zod.array(zod.object({
   "id": zod.number().int(),
@@ -100,6 +101,13 @@ export const GetDashboardResponse = zod.object({
   "email": zod.string(),
   "accountType": zod.enum(['patient', 'clinic', 'partner', 'admin']),
   "clinicId": zod.number().int().nullable()
+})),
+  "leads": zod.array(zod.object({
+  "id": zod.number().int(),
+  "appointmentId": zod.number().int(),
+  "stage": zod.enum(['new_inquiry', 'contacted', 'information_requested', 'photos_received', 'medical_evaluation_pending', 'consultation_offered', 'quotation_sent', 'negotiation', 'awaiting_deposit', 'deposit_received', 'confirmed_booking', 'arriving_soon', 'treatment_completed', 'aftercare', 'closed_won', 'closed_lost']),
+  "createdAt": zod.coerce.date(),
+  "updatedAt": zod.coerce.date()
 }))
 })
 
@@ -179,6 +187,29 @@ export const UpdateAppointmentStatusResponse = zod.object({
   "phone": zod.string().nullable(),
   "country": zod.string().nullable(),
   "reason": zod.string().nullable()
+})
+
+
+/**
+ * @summary Move a CRM lead to another pipeline stage
+ */
+
+
+
+export const UpdateCrmLeadStageParams = zod.object({
+  "leadId": zod.coerce.number().int().min(1)
+})
+
+export const UpdateCrmLeadStageBody = zod.object({
+  "stage": zod.enum(['new_inquiry', 'contacted', 'information_requested', 'photos_received', 'medical_evaluation_pending', 'consultation_offered', 'quotation_sent', 'negotiation', 'awaiting_deposit', 'deposit_received', 'confirmed_booking', 'arriving_soon', 'treatment_completed', 'aftercare', 'closed_won', 'closed_lost'])
+})
+
+export const UpdateCrmLeadStageResponse = zod.object({
+  "id": zod.number().int(),
+  "appointmentId": zod.number().int(),
+  "stage": zod.enum(['new_inquiry', 'contacted', 'information_requested', 'photos_received', 'medical_evaluation_pending', 'consultation_offered', 'quotation_sent', 'negotiation', 'awaiting_deposit', 'deposit_received', 'confirmed_booking', 'arriving_soon', 'treatment_completed', 'aftercare', 'closed_won', 'closed_lost']),
+  "createdAt": zod.coerce.date(),
+  "updatedAt": zod.coerce.date()
 })
 
 

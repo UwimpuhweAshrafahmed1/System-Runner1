@@ -28,6 +28,7 @@ import {
   AppointmentStatusSelect,
   useAppointmentStatusUpdater,
 } from "@/components/workspace/AppointmentStatusSelect";
+import { LeadPipeline } from "@/components/workspace/LeadPipeline";
 import { WorkspaceGate, WorkspaceSignOut } from "@/components/workspace/WorkspaceGate";
 import { apiErrorMessage } from "@/lib/api-errors";
 import {
@@ -271,6 +272,11 @@ function AdminWorkspace({ account }: { account: Account }) {
             )}
           </section>
         </div>
+        <LeadPipeline
+          leads={data?.leads ?? []}
+          appointments={appointments}
+          canEdit
+        />
         <TeamAccessPanel
           currentAccountId={account.id}
           staff={staff}

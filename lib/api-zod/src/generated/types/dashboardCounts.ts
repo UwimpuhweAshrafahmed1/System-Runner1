@@ -12,4 +12,5 @@ export interface DashboardCounts {
   clinics: number;
   providers: number;
   staff: number;
+  leads: number;
 }

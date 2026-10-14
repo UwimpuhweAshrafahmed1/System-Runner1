@@ -17,6 +17,7 @@ import {
 } from "@workspace/api-client-react";
 import { WorkspaceGate, WorkspaceSignOut } from "@/components/workspace/WorkspaceGate";
 import { apiErrorMessage } from "@/lib/api-errors";
+import { crmLeadStageLabel } from "@/lib/crm-lead-stages";
 import {
   appointmentReference,
   formatFullDate,
@@ -77,6 +78,9 @@ function PatientWorkspace({ account }: { account: Account }) {
   });
   const data = query.data;
   const appointments = data?.appointments ?? [];
+  const leadByAppointmentId = new Map(
+    (data?.leads ?? []).map((lead) => [lead.appointmentId, lead]),
+  );
   const providerById = new Map((data?.providers ?? []).map((provider) => [provider.id, provider]));
   const clinicById = new Map((data?.clinics ?? []).map((clinic) => [clinic.id, clinic]));
 
@@ -192,6 +196,12 @@ function PatientWorkspace({ account }: { account: Account }) {
                         {providerById.get(row.providerId)?.name ?? "MediMATCH provider"} ·{" "}
                         {formatFullDate(row.startsAt)}
                       </small>
+                      {leadByAppointmentId.has(row.id) && (
+                        <span>
+                          Care coordination ·{" "}
+                          {crmLeadStageLabel(leadByAppointmentId.get(row.id)!.stage)}
+                        </span>
+                      )}
                     </div>
                     <ChevronRight size={16} />
                   </article>

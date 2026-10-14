@@ -144,6 +144,62 @@ export interface AppointmentStatusInput {
   status: AppointmentStatusInputStatus;
 }
 
+export type CrmLeadStage = typeof CrmLeadStage[keyof typeof CrmLeadStage];
+
+
+export const CrmLeadStage = {
+  new_inquiry: 'new_inquiry',
+  contacted: 'contacted',
+  information_requested: 'information_requested',
+  photos_received: 'photos_received',
+  medical_evaluation_pending: 'medical_evaluation_pending',
+  consultation_offered: 'consultation_offered',
+  quotation_sent: 'quotation_sent',
+  negotiation: 'negotiation',
+  awaiting_deposit: 'awaiting_deposit',
+  deposit_received: 'deposit_received',
+  confirmed_booking: 'confirmed_booking',
+  arriving_soon: 'arriving_soon',
+  treatment_completed: 'treatment_completed',
+  aftercare: 'aftercare',
+  closed_won: 'closed_won',
+  closed_lost: 'closed_lost',
+} as const;
+
+export interface CrmLead {
+  id: number;
+  appointmentId: number;
+  stage: CrmLeadStage;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export type LeadStageInputStage = typeof LeadStageInputStage[keyof typeof LeadStageInputStage];
+
+
+export const LeadStageInputStage = {
+  new_inquiry: 'new_inquiry',
+  contacted: 'contacted',
+  information_requested: 'information_requested',
+  photos_received: 'photos_received',
+  medical_evaluation_pending: 'medical_evaluation_pending',
+  consultation_offered: 'consultation_offered',
+  quotation_sent: 'quotation_sent',
+  negotiation: 'negotiation',
+  awaiting_deposit: 'awaiting_deposit',
+  deposit_received: 'deposit_received',
+  confirmed_booking: 'confirmed_booking',
+  arriving_soon: 'arriving_soon',
+  treatment_completed: 'treatment_completed',
+  aftercare: 'aftercare',
+  closed_won: 'closed_won',
+  closed_lost: 'closed_lost',
+} as const;
+
+export interface LeadStageInput {
+  stage: LeadStageInputStage;
+}
+
 export type StaffAccessInputAccountType = typeof StaffAccessInputAccountType[keyof typeof StaffAccessInputAccountType];
 
 
@@ -169,6 +225,7 @@ export interface DashboardCounts {
   clinics: number;
   providers: number;
   staff: number;
+  leads: number;
 }
 
 export interface Dashboard {
@@ -178,5 +235,6 @@ export interface Dashboard {
   clinics: Clinic[];
   providers: Provider[];
   staff: Account[];
+  leads: CrmLead[];
 }
 

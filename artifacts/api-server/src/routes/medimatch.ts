@@ -9,6 +9,7 @@ import {
 import {
   appointmentsTable,
   clinicsTable,
+  crmLeadsTable,
   db,
   providersTable,
   usersTable,
@@ -20,6 +21,9 @@ import {
   GetDashboardResponse,
   ListProvidersResponse,
   ListStaffAccountsResponse,
+  UpdateCrmLeadStageBody,
+  UpdateCrmLeadStageParams,
+  UpdateCrmLeadStageResponse,
   UpdateAppointmentStatusBody,
   UpdateAppointmentStatusParams,
   UpdateAppointmentStatusResponse,
@@ -209,6 +213,45 @@ function appointmentDto(
   };
 }
 
+function crmLeadDto(lead: typeof crmLeadsTable.$inferSelect) {
+  return {
+    id: lead.id,
+    appointmentId: lead.appointmentId,
+    stage: lead.stage,
+    createdAt: lead.createdAt.toISOString(),
+    updatedAt: lead.updatedAt.toISOString(),
+  };
+}
+
+async function leadsForAccount(account: CurrentAccount) {
+  if (account.accountType === "partner") return [];
+
+  const base = db
+    .select({ lead: crmLeadsTable })
+    .from(crmLeadsTable)
+    .innerJoin(
+      appointmentsTable,
+      eq(crmLeadsTable.appointmentId, appointmentsTable.id),
+    );
+
+  const rows =
+    account.accountType === "admin"
+      ? await base.orderBy(desc(crmLeadsTable.updatedAt)).limit(100)
+      : account.accountType === "clinic" && account.clinicId
+        ? await base
+            .where(eq(appointmentsTable.clinicId, account.clinicId))
+            .orderBy(desc(crmLeadsTable.updatedAt))
+            .limit(100)
+        : account.accountType === "patient"
+          ? await base
+              .where(eq(appointmentsTable.patientUserId, account.id))
+              .orderBy(desc(crmLeadsTable.updatedAt))
+              .limit(100)
+          : [];
+
+  return rows.map(({ lead }) => crmLeadDto(lead));
+}
+
 function providerDto(provider: typeof providersTable.$inferSelect) {
   return {
     id: provider.id,
@@ -325,6 +368,7 @@ router.get("/dashboard", async (req, res): Promise<void> => {
       ? await db.select().from(usersTable).orderBy(asc(usersTable.name))
       : [];
   const visibleAppointments = appointmentRows.map(appointmentDto);
+  const leads = await leadsForAccount(account);
 
   res.json(
     GetDashboardResponse.parse({
@@ -339,6 +383,7 @@ router.get("/dashboard", async (req, res): Promise<void> => {
         clinics: clinicRows.length,
         providers: providerRows.length,
         staff: staffRows.length,
+        leads: leads.length,
       },
       appointments: visibleAppointments,
       clinics: clinicRows.map((clinic) => ({
@@ -349,6 +394,7 @@ router.get("/dashboard", async (req, res): Promise<void> => {
       })),
       providers: providerRows.map(providerDto),
       staff: staffRows.map(accountDto),
+      leads,
     }),
   );
 });
@@ -393,23 +439,30 @@ router.post("/appointments", async (req, res): Promise<void> => {
 
   const endsAt = new Date(startsAt.getTime() + 30 * 60 * 1000);
   try {
-    const [appointment] = await db
-      .insert(appointmentsTable)
-      .values({
-        patientUserId: account.id,
-        providerId: provider.id,
-        clinicId: provider.clinicId,
-        startsAt,
-        endsAt,
-        channel: input.channel,
-        treatmentName: input.treatmentName,
-        patientName: input.patientName,
-        patientEmail: input.patientEmail,
-        phone: input.phone ?? null,
-        country: input.country ?? null,
-        reason: input.reason ?? null,
-      })
-      .returning();
+    const appointment = await db.transaction(async (tx) => {
+      const [created] = await tx
+        .insert(appointmentsTable)
+        .values({
+          patientUserId: account.id,
+          providerId: provider.id,
+          clinicId: provider.clinicId,
+          startsAt,
+          endsAt,
+          channel: input.channel,
+          treatmentName: input.treatmentName,
+          patientName: input.patientName,
+          patientEmail: input.patientEmail,
+          phone: input.phone ?? null,
+          country: input.country ?? null,
+          reason: input.reason ?? null,
+        })
+        .returning();
+
+      if (created) {
+        await tx.insert(crmLeadsTable).values({ appointmentId: created.id });
+      }
+      return created;
+    });
 
     if (!appointment) {
       res.status(500).json({ error: "The appointment could not be saved." });
@@ -505,6 +558,67 @@ router.patch(
     res.json(
       UpdateAppointmentStatusResponse.parse(appointmentDto(updated)),
     );
+  },
+);
+
+router.patch(
+  "/crm/leads/:leadId/stage",
+  async (req, res): Promise<void> => {
+    const account = await getCurrentAccount(req);
+    if (!account) {
+      unauthorized(res);
+      return;
+    }
+    if (account.accountType !== "admin" && account.accountType !== "clinic") {
+      forbidden(res, "Employee or CEO access is required.");
+      return;
+    }
+    if (account.accountType === "clinic" && !account.clinicId) {
+      forbidden(res, "Your clinic workspace is not assigned yet.");
+      return;
+    }
+
+    const params = UpdateCrmLeadStageParams.safeParse(req.params);
+    const body = UpdateCrmLeadStageBody.safeParse(req.body);
+    if (!params.success || !body.success) {
+      res.status(400).json({ error: "Invalid lead stage update." });
+      return;
+    }
+
+    const [record] = await db
+      .select({
+        lead: crmLeadsTable,
+        clinicId: appointmentsTable.clinicId,
+      })
+      .from(crmLeadsTable)
+      .innerJoin(
+        appointmentsTable,
+        eq(crmLeadsTable.appointmentId, appointmentsTable.id),
+      )
+      .where(eq(crmLeadsTable.id, params.data.leadId))
+      .limit(1);
+    if (!record) {
+      res.status(404).json({ error: "Lead not found." });
+      return;
+    }
+    if (
+      account.accountType === "clinic" &&
+      record.clinicId !== account.clinicId
+    ) {
+      forbidden(res, "You can only update leads assigned to your clinic.");
+      return;
+    }
+
+    const [updated] = await db
+      .update(crmLeadsTable)
+      .set({ stage: body.data.stage, updatedAt: new Date() })
+      .where(eq(crmLeadsTable.id, record.lead.id))
+      .returning();
+    if (!updated) {
+      res.status(404).json({ error: "Lead not found." });
+      return;
+    }
+    res.json(UpdateCrmLeadStageResponse.parse(crmLeadDto(updated)));
   },
 );
 

@@ -19,6 +19,7 @@ import {
   AppointmentStatusSelect,
   useAppointmentStatusUpdater,
 } from "@/components/workspace/AppointmentStatusSelect";
+import { LeadPipeline } from "@/components/workspace/LeadPipeline";
 import { WorkspaceGate, WorkspaceSignOut } from "@/components/workspace/WorkspaceGate";
 import { apiErrorMessage } from "@/lib/api-errors";
 import {
@@ -183,6 +184,12 @@ function ClinicWorkspace({ account }: { account: Account }) {
             </div>
           </article>
         </section>
+        <LeadPipeline
+          leads={data?.leads ?? []}
+          appointments={appointments}
+          canEdit
+          title="Your clinic’s patient journey"
+        />
         <div className="workspace-grid workspace-grid--internal">
           <section className="workspace-panel" id="queue">
             <div className="workspace-panel__head">

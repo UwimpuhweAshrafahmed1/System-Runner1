@@ -8,6 +8,7 @@
 import type { Account } from './account';
 import type { Appointment } from './appointment';
 import type { Clinic } from './clinic';
+import type { CrmLead } from './crmLead';
 import type { DashboardCounts } from './dashboardCounts';
 import type { Provider } from './provider';
 
@@ -18,4 +19,5 @@ export interface Dashboard {
   clinics: Clinic[];
   providers: Provider[];
   staff: Account[];
+  leads: CrmLead[];
 }

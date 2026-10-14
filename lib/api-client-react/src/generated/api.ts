@@ -24,8 +24,10 @@ import type {
   Appointment,
   AppointmentInput,
   AppointmentStatusInput,
+  CrmLead,
   Dashboard,
   HealthStatus,
+  LeadStageInput,
   Provider,
   StaffAccessInput
 } from './api.schemas';
@@ -541,6 +543,95 @@ export const useUpdateAppointmentStatus = <TError = ErrorType<void>,
         TContext
       > => {
       return useMutation(getUpdateAppointmentStatusMutationOptions(options));
+    }
+
+export const getUpdateCrmLeadStageUrl = (leadId: number,) => {
+
+
+
+
+  return `/api/crm/leads/${leadId}/stage`
+}
+
+/**
+ * @summary Move a CRM lead to another pipeline stage
+ */
+export const updateCrmLeadStage = async (leadId: number,
+    leadStageInput: LeadStageInput, options?: Parameters<typeof customFetch>[1]): Promise<CrmLead> => {
+
+    const getHeaders = (h?: NonNullable<RequestInit['headers']>): Record<string, string | readonly string[]> => {
+    if (!h) return {};
+    if (h instanceof Headers) return Object.fromEntries(h.entries());
+    if (Symbol.iterator in h) {
+      return Object.fromEntries(
+        Array.from(h as Iterable<Iterable<string>>, (entry) => Array.from(entry) as [string, string]),
+      );
+    }
+    const headers: Record<string, string | readonly string[]> = {};
+    for (const [name, value] of Object.entries<string | readonly string[] | undefined>(h)) {
+      if (value !== undefined) headers[name] = value;
+    }
+    return headers;
+  };
+return customFetch<CrmLead>(getUpdateCrmLeadStageUrl(leadId),
+  {
+    ...options,
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json', ...getHeaders(options?.headers) },
+    body: JSON.stringify(leadStageInput)
+  }
+);}
+
+
+
+
+
+export const getUpdateCrmLeadStageMutationKey = () => ['updateCrmLeadStage'] as const;
+
+export const getUpdateCrmLeadStageMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCrmLeadStage>>, TError,UpdateCrmLeadStageMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof updateCrmLeadStage>>, TError,UpdateCrmLeadStageMutationVariables, TContext> => {
+
+const mutationKey = getUpdateCrmLeadStageMutationKey();
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof updateCrmLeadStage>>, UpdateCrmLeadStageMutationVariables> = (props) => {
+          const {leadId,data} = props ?? {};
+
+          return  updateCrmLeadStage(leadId,data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type UpdateCrmLeadStageMutationResult = NonNullable<Awaited<ReturnType<typeof updateCrmLeadStage>>>
+    export type UpdateCrmLeadStageMutationBody = BodyType<LeadStageInput>
+    export type UpdateCrmLeadStageMutationError = ErrorType<void>
+    export type UpdateCrmLeadStageMutationVariables = {leadId: number;data: BodyType<LeadStageInput>}
+
+    /**
+ * @summary Move a CRM lead to another pipeline stage
+ */
+export const useUpdateCrmLeadStage = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof updateCrmLeadStage>>, TError,UpdateCrmLeadStageMutationVariables, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof updateCrmLeadStage>>,
+        TError,
+        UpdateCrmLeadStageMutationVariables,
+        TContext
+      > => {
+      return useMutation(getUpdateCrmLeadStageMutationOptions(options));
     }
 
 export const getListStaffAccountsUrl = () => {
