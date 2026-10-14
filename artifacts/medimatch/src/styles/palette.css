@@ -505,6 +505,16 @@
   color: var(--mm-status-disabled);
 }
 
+.care-toggle.is-active {
+  border-color: var(--mm-brand-cyan);
+  background: #f0fbff;
+}
+
+.care-toggle.is-active .care-toggle__icon {
+  background: var(--mm-brand-blue-tint);
+  color: var(--mm-brand-blue);
+}
+
 .team-access-row__avatar,
 .care-login-card button,
 .care-access-card button {
