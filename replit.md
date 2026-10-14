@@ -53,6 +53,7 @@ MediMATCH is a connected-care website where patients book appointments with care
 ## User preferences
 
 - Build on the user's existing MediMATCH design and copy; do not replace it with new designs or placeholder data.
+- Use the approved brand colors from the shared `--mm-brand-*` tokens, with semantic status colors kept distinct. Do not edit `src/styles/medimatch.css`; add scoped overrides in the later palette stylesheet.
 - Never put the admin email in client code, docs, or memory.
 
 ## Gotchas
