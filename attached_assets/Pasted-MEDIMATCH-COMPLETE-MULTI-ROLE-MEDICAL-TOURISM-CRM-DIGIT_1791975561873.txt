@@ -1,0 +1,1114 @@
+MEDIMATCH: COMPLETE MULTI-ROLE MEDICAL TOURISM CRM & DIGITAL CLINIC PLATFORM
+
+## YOUR ROLE
+
+Act as a senior full-stack software architect, CRM engineer, healthcare technology specialist, UI/UX designer, database architect, and security engineer.
+
+You are responsible for transforming my existing MediMATCH project into a fully functional, enterprise-grade medical tourism CRM, patient coordination platform, clinic marketplace, and digital consultation system.
+
+This must be a real, working application, not a visual prototype.
+
+**IMPORTANT: I have already uploaded three existing CRM projects and their source code into the Replit workspace.**
+
+Before making changes, carefully inspect all uploaded CRM projects, their source code, database structures, features, interfaces, dependencies, and existing functionality.
+
+Your objective is to combine the strongest features, functionality, interface patterns, and workflows from these systems into one unified application.
+
+I also want feature coverage comparable to Bitrix24, including its CRM, communication, collaboration, automation, staff management, and business administration capabilities.
+
+Do not use the Bitrix24 name, logo, proprietary code, copied design assets, or other protected branding. Build original implementations of comparable functionality.
+
+The final platform must operate entirely under my brand:
+
+**MediMATCH**
+
+Tagline: Connecting Patients, Clinics, and Care.
+
+---
+
+# PHASE 1: ANALYZE EXISTING PROJECTS
+
+Start by inspecting the complete Replit project.
+
+Identify:
+
+1. The current MediMATCH application architecture.
+2. All three uploaded CRM projects.
+3. Existing frontend components and backend services.
+4. Database schemas and migration systems.
+5. Authentication and authorization systems.
+6. API endpoints and integrations.
+7. Existing dashboards and CRM functionality.
+8. Reusable modules, dependencies, and UI elements.
+9. Licensing and compatibility restrictions.
+10. Missing functionality needed for the final platform.
+
+Produce a feature comparison matrix before starting integration.
+
+Identify which components can legally and technically be reused, which require adaptation, and which need to be developed independently.
+
+Do not blindly merge three codebases.
+
+Select a coherent application architecture that preserves maintainability, security, scalability, and future development.
+
+**Preserve the existing MediMATCH application and its current visual identity.**
+
+Do not delete working features, overwrite existing databases, or break existing functionality.
+
+Create a backup, use version control, and introduce changes through controlled migrations.
+
+---
+
+# PHASE 2: PRESERVE THE MEDIMATCH DESIGN SYSTEM
+
+I have already developed the MediMATCH login and workspace selection page.
+
+Use my existing screenshot and application as the primary design reference.
+
+The current login page includes four workspace options:
+
+- Client: Patient Portal
+- Employee: Care Team Workspace
+- Partner: Partner Workspace
+- CEO: Network Command
+
+Keep these four options and retain the existing premium appearance.
+
+Design language:
+
+- Medical technology aesthetic
+- Clean white backgrounds
+- Deep navy typography
+- Soft blue accents
+- Light cyan highlights
+- Subtle orange calls to action
+- Elegant cards
+- Rounded corners
+- Smooth transitions
+- Premium SaaS dashboard design
+- Excellent readability
+- Desktop, tablet, and mobile compatibility
+
+Every dashboard must look like part of the same MediMATCH ecosystem, while offering a distinct experience appropriate for its user role.
+
+Make the platform visually impressive, modern, polished, fast, and intuitive.
+
+Do not create a generic admin template.
+
+---
+
+# PHASE 3: CENTRALIZED AUTHENTICATION AND ROLE SYSTEM
+
+Create one centralized authentication platform with four main workspaces.
+
+## USER ROLES
+
+1. CEO / Super Administrator
+2. Employee / Medical Coordinator
+3. Partner / Clinic, Hospital, Hotel, Transportation, or Service Provider
+4. Client / Patient
+
+Each person must have a secure individual account.
+
+Users must only access information and functions permitted by their assigned role.
+
+Workspace selection must not grant or modify permissions.
+
+The backend must independently validate all permissions.
+
+Implement:
+
+- Secure registration and login
+- Email verification
+- Password reset
+- Optional multifactor authentication
+- Account invitations
+- Session management
+- Login history
+- Device and session revocation
+- Role-based access control
+- Fine-grained permissions
+- Organization-level access restrictions
+- Account suspension
+- User activity logs
+- Secure document access
+
+The CEO can create employees, invite partners, manage accounts, and assign permissions.
+
+Employees must never be able to change their own permissions.
+
+Partners must be isolated from other partners' confidential information.
+
+Clients must only access their own records and authorized communications.
+
+---
+
+# PHASE 4: CEO DASHBOARD: NETWORK COMMAND
+
+The CEO workspace must be the most powerful dashboard.
+
+It serves as the operational headquarters for the entire MediMATCH business.
+
+The CEO must be able to manage and monitor all authorized business operations.
+
+## A. Executive Overview
+
+Create a dashboard displaying:
+
+- Total leads
+- New patient inquiries
+- Active patients
+- Confirmed bookings
+- Completed treatments
+- Upcoming surgeries
+- Monthly revenue
+- Revenue by clinic
+- Revenue by coordinator
+- Outstanding payments
+- Partner commissions
+- Conversion rates
+- Pending consultations
+- Open support tickets
+- Employee performance
+- Customer satisfaction
+- Financial forecasts
+
+Use beautiful charts, statistics, interactive reports, and filters.
+
+Allow filtering by date, employee, clinic, partner, country, treatment, and lead source.
+
+## B. Employee Management
+
+CEO can:
+
+- Add employees
+- Create departments
+- Assign roles
+- Assign patients and leads
+- Monitor sales performance
+- Review activity logs
+- View assigned customers
+- Track completed tasks
+- Review response times
+- Review sales conversion rates
+- Monitor follow-up completion
+- Set sales targets
+- Manage shifts
+- Approve leave requests
+- Create performance reports
+- Calculate bonuses and commissions
+
+Allow different employee roles:
+
+- Sales Coordinator
+- Medical Coordinator
+- Customer Support
+- Patient Concierge
+- Finance Employee
+- Operations Manager
+- Team Leader
+- Medical Reviewer
+- Administrator
+
+Medical access must be separately permissioned and restricted to appropriately authorized personnel.
+
+## C. Central CRM
+
+Build a full customer relationship management system.
+
+Include:
+
+- Leads
+- Contacts
+- Organizations
+- Patients
+- Deals
+- Sales pipelines
+- Treatment inquiries
+- Consultations
+- Tasks
+- Follow-ups
+- Notes
+- Communication history
+- Quotations
+- Invoices
+- Payments
+- Bookings
+- Appointments
+- Documents
+- Custom fields
+- Tags
+- Lead scoring
+- Automation workflows
+
+Each patient should have a unified profile.
+
+The CEO should be able to see all authorized information across employees, patients, partners, consultations, finances, and bookings.
+
+## D. Partner Management
+
+CEO can manage:
+
+- Partner clinics
+- Hospitals
+- Surgeons
+- Hotels
+- Transportation companies
+- Translators
+- Nurses
+- Patient assistants
+- Tourism companies
+- Travel agencies
+- Other service providers
+
+For each partner, store:
+
+- Business information
+- Authorized contacts
+- Services
+- Pricing
+- Contracts
+- Commission agreements
+- Availability
+- Bookings
+- Invoices
+- Payments
+- Performance
+- Ratings
+- Documents
+- Financial reports
+
+## E. Financial Management
+
+Create financial management functionality for:
+
+- Patient payments
+- Booking deposits
+- Refunds
+- Partner invoices
+- Clinic payments
+- Employee commissions
+- Partner commissions
+- Outstanding balances
+- Operational expenses
+- Revenue tracking
+- Multi-currency transactions
+- Financial statements
+- Payment reconciliation
+
+Support TRY, USD, EUR, and GBP.
+
+Use auditable transaction records and accurate exchange-rate handling.
+
+CEO must have access to detailed financial analytics and reconciliation.
+
+---
+
+# PHASE 5: EMPLOYEE CRM: CARE TEAM WORKSPACE
+
+Create a complete workspace for employees to manage leads, patients, communication, bookings, and support.
+
+## A. Sales Pipeline
+
+Implement a visually attractive drag-and-drop Kanban board.
+
+Lead stages:
+
+1. New Inquiry
+2. Contacted
+3. Information Requested
+4. Photos Received
+5. Medical Evaluation Pending
+6. Consultation Offered
+7. Quotation Sent
+8. Negotiation
+9. Awaiting Deposit
+10. Deposit Received
+11. Confirmed Booking
+12. Arriving Soon
+13. Treatment Completed
+14. Aftercare
+15. Closed Won
+16. Closed Lost
+
+Allow customizable pipelines, stage rules, automated reminders, and filters.
+
+## B. Patient Profiles
+
+Every patient record must include:
+
+- Full name
+- Contact information
+- Country
+- Preferred language
+- Desired treatment
+- Budget
+- Preferred travel dates
+- Medical consultation status
+- Assigned coordinator
+- Clinic preferences
+- Quotation history
+- Booking status
+- Payment status
+- Documents
+- Communication history
+- Support requests
+- Travel itinerary
+- Follow-up schedule
+
+Keep clinical information in properly restricted areas of the platform.
+
+## C. Unified Communication Inbox
+
+Create a centralized communication interface supporting integrations with:
+
+- WhatsApp Business Platform
+- Email
+- Website live chat
+- SMS providers
+- Internal messaging
+- Patient portal messaging
+
+Show all permitted conversations directly inside the CRM.
+
+Include:
+
+- Conversation assignment
+- Internal notes
+- Saved replies
+- Message templates
+- Translation assistance
+- Response reminders
+- File attachments
+- Automated routing
+- Conversation history
+- Unread indicators
+
+Use official provider APIs and compliant integration methods.
+
+Do not implement unauthorized WhatsApp automation.
+
+## D. Treatment Quotations
+
+Create an interactive medical treatment quotation generator.
+
+Employees can:
+
+- Select procedures
+- Select partner clinics
+- Compare authorized offers
+- Add service packages
+- Calculate treatment totals
+- Add coordination fees
+- Generate branded PDF quotations
+- Send quotations
+- Track quotation acceptance
+- Record deposit status
+
+Show clearly which charges belong to MediMATCH and which belong to the treatment provider.
+
+No treatment price should be presented as confirmed unless the provider has approved it.
+
+## E. Employee Tasks and Support
+
+Add:
+
+- Personal task dashboard
+- Team calendars
+- Appointment scheduling
+- Follow-up reminders
+- Internal chat
+- Document sharing
+- Support tickets
+- Patient complaints
+- Escalation workflows
+- Daily activity overview
+- Notifications
+- Performance tracking
+
+Also build an internal IT helpdesk for employee login problems, account permissions, and technical support.
+
+Never display or store recoverable user passwords.
+
+---
+
+# PHASE 6: PARTNER CRM: PARTNER WORKSPACE
+
+Partners must have their own independent professional business portal.
+
+A partner can represent a clinic, hospital, surgeon, hotel, travel agency, transportation provider, or another approved service provider.
+
+The dashboard must adapt to the partner category.
+
+## A. Clinic and Hospital Partners
+
+Clinic partners can:
+
+- Manage their clinic profile
+- Add authorized physicians
+- List treatments and procedures
+- Upload pricing
+- Define available dates
+- Receive patient referrals
+- Review permitted patient inquiries
+- Submit treatment offers
+- Propose consultation times
+- Accept or decline bookings
+- Upload authorized documents
+- Track completed treatments
+- Manage invoices
+- Track payments
+- Review commissions
+- Communicate with MediMATCH coordinators
+
+Patients' sensitive medical records should only become accessible when legally authorized and necessary.
+
+## B. Hotel Partners
+
+Hotels can:
+
+- Manage rooms
+- Set room prices
+- Manage availability
+- Receive reservation requests
+- Confirm bookings
+- Issue invoices
+- Track payments
+- Offer accommodation packages
+
+## C. Transportation Partners
+
+Transport companies can:
+
+- Manage vehicles
+- Manage drivers
+- Receive transfer requests
+- Assign drivers
+- Confirm pickup schedules
+- Track bookings
+- Manage payments
+
+## D. Medical Support Partners
+
+Authorized nurses, translators, and patient assistants can:
+
+- Maintain professional profiles
+- Provide credentials
+- Define availability
+- Accept service assignments
+- View necessary assignment details
+- Update service status
+- Track earnings
+- Communicate with coordinators
+
+## E. B2B Marketplace
+
+Create a business-to-business marketplace.
+
+MediMATCH and partners can offer services to one another.
+
+Support:
+
+- Service catalogs
+- Price lists
+- Requests for quotation
+- Negotiations
+- Contracts
+- Purchase orders
+- Sales orders
+- Invoices
+- Payments
+- Commission agreements
+- Partner messaging
+- Booking fulfillment
+- Transaction reports
+
+All financial and service relationships must have clear ownership, access restrictions, and audit histories.
+
+---
+
+# PHASE 7: CLIENT CRM: PATIENT PORTAL
+
+The Client Portal is designed for international patients considering medical treatment in Istanbul, Turkey.
+
+The experience must be welcoming, simple, trustworthy, multilingual, and easy to use.
+
+## A. Patient Onboarding
+
+When a patient registers, guide them through a short inquiry process.
+
+Ask:
+
+1. What medical or aesthetic procedure are you interested in?
+2. What is your estimated budget?
+3. When would you like to travel to Istanbul?
+4. Which country are you traveling from?
+5. What language do you prefer?
+6. Would you like assistance with hotels, airport transfers, transportation, or personal coordination?
+
+Make the experience modern and conversational.
+
+Avoid overwhelming the patient with unnecessary forms.
+
+## B. Clinic Matching Engine
+
+This is one of the most important features in the entire system.
+
+Based on the patient's:
+
+- Desired procedure
+- Budget
+- Travel dates
+- Preferred language
+- Medical needs
+- Clinic preferences
+
+MediMATCH should identify suitable verified partner clinics in Istanbul.
+
+Show a comparison of available clinic options.
+
+Each clinic card should include:
+
+- Clinic name
+- Location
+- Procedures offered
+- Verified credentials and licensing
+- Relevant physician information
+- Indicative price range
+- Consultation availability
+- Included services
+- Hotel or transfer availability
+- Patient reviews where verified
+
+Only show verified information.
+
+Distinguish indicative prices from confirmed quotations and requests pending provider review.
+
+Do not guarantee medical suitability or outcomes.
+
+## C. Clinic Selection
+
+Allow patients to select a clinic or request several offers.
+
+Their request should enter the MediMATCH CRM and be assigned to a coordinator.
+
+The clinic should receive only the information needed to evaluate the inquiry and only when authorized.
+
+The coordinator then manages the consultation process.
+
+## D. Digital Consultation
+
+Create an online consultation system.
+
+Support:
+
+- Consultation requests
+- Appointment scheduling
+- Video consultation integrations
+- Secure messaging
+- Secure photo uploads
+- Medical questionnaires
+- Physician review
+- Consultation reports
+- Treatment recommendations
+- Follow-up appointments
+
+Clearly distinguish between MediMATCH coordination services and clinical consultations provided by appropriately licensed medical professionals.
+
+Do not automatically diagnose patients or approve surgeries.
+
+## E. Patient Concierge
+
+After choosing a clinic, the patient can request assistance from MediMATCH.
+
+Offer:
+
+- Airport pickup
+- Hotel reservations
+- Appointment coordination
+- Hospital transportation
+- Interpreter services
+- Personal patient assistant
+- Recovery accommodation
+- Postoperative logistics
+- Local support in Istanbul
+- Departure transportation
+
+Create separate optional packages with transparent pricing.
+
+Allow the patient to select and purchase only the services they want.
+
+## F. Patient Journey
+
+Create a beautiful visual progress tracker.
+
+Stages:
+
+Inquiry → Clinic Matching → Clinic Selection → Consultation → Treatment Plan → Booking → Travel Preparation → Arrival → Treatment → Recovery → Follow-up → Completed
+
+Allow patients to track their journey from their dashboard.
+
+## G. Patient Dashboard
+
+Patients should be able to see:
+
+- Selected clinic
+- Assigned coordinator
+- Upcoming appointments
+- Consultation status
+- Treatment quotation
+- Booking confirmations
+- Payment receipts
+- Hotel reservations
+- Airport transfers
+- Uploaded documents
+- Personal itinerary
+- Support chat
+- Notifications
+- Follow-up appointments
+
+Patients must never see another patient's information.
+
+---
+
+# PHASE 8: MEDIMATCH COORDINATION BUSINESS MODEL
+
+The most important business concept is that MediMATCH is an independent medical tourism coordination and clinic-matching platform.
+
+MediMATCH is not automatically the provider performing treatment.
+
+Patients contact MediMATCH to find appropriate healthcare providers in Istanbul.
+
+The business process should operate as follows:
+
+**STEP 1: Patient Inquiry**
+
+Patient submits treatment, budget, travel dates, and preferences.
+
+**STEP 2: Lead Creation**
+
+A new lead is automatically created in the CRM.
+
+**STEP 3: Clinic Matching**
+
+The system identifies matching partner clinics.
+
+**STEP 4: Clinic Comparison**
+
+Patient receives clinic options within their budget and travel preferences.
+
+**STEP 5: Clinic Selection**
+
+Patient chooses their preferred provider.
+
+**STEP 6: Consultation**
+
+The patient is connected with an authorized medical professional for evaluation.
+
+**STEP 7: Treatment Offer**
+
+The clinic provides an authorized treatment quotation.
+
+**STEP 8: Optional Coordination Services**
+
+MediMATCH offers travel, accommodation, translation, concierge, and local assistance services.
+
+**STEP 9: Booking**
+
+All confirmed appointments, payments, and travel services appear in the system.
+
+**STEP 10: Arrival and Treatment**
+
+The coordinator manages arrival logistics and communication with service providers.
+
+**STEP 11: Recovery and Follow-up**
+
+The patient can contact the coordination team and access authorized postoperative instructions from their treating provider.
+
+**STEP 12: Completion**
+
+The patient can review services, receive receipts, and access relevant documents.
+
+This entire journey must be connected across all four workspaces.
+
+A single booking should be reflected appropriately in the CEO, Employee, Partner, and Client dashboards.
+
+---
+
+# PHASE 9: BITRIX24-STYLE BUSINESS FUNCTIONALITY
+
+Build a comprehensive set of enterprise CRM capabilities comparable to a mature all-in-one business platform.
+
+Include:
+
+### CRM
+- Contact management
+- Lead management
+- Deal management
+- Multiple pipelines
+- Sales forecasting
+- Custom fields
+- CRM timelines
+- Contact segmentation
+- Quotation management
+- Revenue analytics
+
+### Team Collaboration
+- Internal team chat
+- Group conversations
+- Team announcements
+- Shared workspaces
+- Document management
+- Mentions
+- Notifications
+- Shared calendars
+
+### Project Management
+- Projects
+- Tasks
+- Task dependencies
+- Kanban boards
+- List views
+- Calendar views
+- Gantt charts
+- Deadlines
+- Workload management
+
+### Business Automation
+- Workflow builder
+- Automated lead assignment
+- Follow-up reminders
+- Booking notifications
+- Approval workflows
+- Trigger-based actions
+- Scheduled tasks
+- Escalations
+
+### Communication
+- Unified inbox
+- Email integration
+- WhatsApp integration
+- Website live chat
+- Call logging
+- Communication templates
+- Conversation analytics
+
+### Business Administration
+- Employee management
+- Partner management
+- Financial reporting
+- Invoicing
+- Service catalogs
+- Booking management
+- Inventory where relevant
+- Contracts
+- Document templates
+- Audit trails
+
+### Analytics
+- CEO reporting
+- Sales reports
+- Conversion funnels
+- Revenue reports
+- Employee productivity
+- Clinic performance
+- Lead source attribution
+- Customer satisfaction
+- Custom dashboards
+
+Implement these through modular, maintainable functionality rather than copying another product.
+
+---
+
+# PHASE 10: AI ASSISTANT AND AUTOMATION
+
+Include an AI assistant inside the CRM.
+
+The AI assistant should help employees with:
+
+- Summarizing conversations
+- Identifying patient interests
+- Suggesting follow-up actions
+- Drafting replies
+- Translating messages
+- Classifying leads
+- Generating quotation drafts
+- Finding suitable clinic options
+- Identifying overdue tasks
+- Producing sales reports
+- Assisting with scheduling
+
+The AI should not make autonomous clinical decisions.
+
+Require appropriate human approval before messages, quotations, bookings, financial changes, or sensitive clinical information are sent or changed.
+
+Use privacy-conscious data processing and approved integrations.
+
+---
+
+# PHASE 11: DATABASE ARCHITECTURE
+
+Design a unified relational database, preferably PostgreSQL, with well-structured relationships.
+
+Core entities should include:
+
+- Users
+- Roles
+- Permissions
+- Organizations
+- Employees
+- Patients
+- Clinics
+- Physicians
+- Partners
+- Services
+- Treatments
+- Leads
+- Deals
+- Pipelines
+- Consultations
+- Medical documents
+- Quotations
+- Bookings
+- Appointments
+- Hotels
+- Transfers
+- Invoices
+- Payments
+- Commissions
+- Conversations
+- Messages
+- Tasks
+- Support tickets
+- Notifications
+- Activity logs
+- Audit logs
+
+Create secure relationships between all modules.
+
+Use tenant-aware authorization to isolate partner organizations.
+
+Keep financial, clinical, and operational records appropriately separated.
+
+---
+
+# PHASE 12: SECURITY AND COMPLIANCE
+
+This platform handles sensitive medical and financial information.
+
+Security must be a core requirement, not an optional feature.
+
+Implement:
+
+- Backend-enforced authorization
+- Least-privilege role permissions
+- Secure password hashing
+- MFA support
+- Encrypted connections
+- Appropriate encryption at rest
+- Secure file storage
+- Signed or authorized document access
+- Organization and patient data isolation
+- Audit logging
+- Rate limiting
+- Input validation
+- Secure API authentication
+- Backups
+- Restore procedures
+- Account recovery
+- Session revocation
+- Data retention and deletion workflows
+- Consent and privacy notices
+
+Design for compliance review under applicable Turkish KVKK, GDPR where relevant, healthcare confidentiality requirements, and medical tourism regulations.
+
+Review payment, referral, healthcare advertising, and intermediary-service workflows for applicable legal requirements.
+
+Never claim regulatory compliance or certification without actual verification.
+
+Do not store card payment details directly. Use appropriately certified payment providers.
+
+---
+
+# PHASE 13: UI/UX QUALITY
+
+Every workspace should feel like a premium enterprise SaaS product.
+
+Include:
+
+- Elegant sidebar navigation
+- Top navigation and global search
+- Beautiful dashboard widgets
+- Interactive charts
+- Drag-and-drop Kanban boards
+- Filterable data tables
+- Detailed customer profiles
+- Timeline views
+- Slide-over information panels
+- Modal dialogs
+- Notification center
+- Mobile-responsive layouts
+- Loading skeletons
+- Empty states
+- Error handling
+- Light and dark mode
+- Accessible color contrast
+- Consistent MediMATCH branding
+
+Use my current MediMATCH screenshot as the design reference.
+
+Do not replace the established brand with the look of another CRM.
+
+The experience should be coherent and professional across every screen.
+
+---
+
+# PHASE 14: TECHNICAL IMPLEMENTATION
+
+Use the existing project's framework wherever technically appropriate.
+
+Prefer a robust architecture with:
+
+- TypeScript
+- Reusable frontend components
+- Modular backend services
+- PostgreSQL
+- Typed database queries
+- Secure authentication
+- Server-side authorization
+- Documented APIs
+- Database migrations
+- Background job processing
+- Integration adapters
+- Centralized error handling
+- Automated tests
+- Production configuration management
+
+Do not migrate to an entirely new technology stack unless a clear technical justification exists.
+
+Never hardcode credentials or production secrets.
+
+External services must use environment variables.
+
+If API credentials are unavailable, implement the integration interface and clearly mark it as pending configuration.
+
+Do not show fake data as actual operational information.
+
+Use clearly identified demonstration data only for testing.
+
+---
+
+# PHASE 15: IMPLEMENTATION ORDER
+
+Build this project progressively.
+
+**Stage 1: Project Audit**
+
+Inspect the existing MediMATCH application and all uploaded CRM repositories.
+
+Provide a detailed integration strategy and feature inventory.
+
+**Stage 2: Foundation**
+
+Build the central database, authentication, permissions, and four workspace routing systems.
+
+**Stage 3: Central CRM**
+
+Implement leads, contacts, patients, organizations, tasks, deals, communications, and shared records.
+
+**Stage 4: CEO Workspace**
+
+Build executive dashboards, employee management, partner management, financial monitoring, and analytics.
+
+**Stage 5: Employee Workspace**
+
+Build sales pipelines, patient coordination, unified communication, quotations, scheduling, and support.
+
+**Stage 6: Partner Workspace**
+
+Build clinic profiles, service catalogs, offers, partner bookings, commercial transactions, and partner communication.
+
+**Stage 7: Client Workspace**
+
+Build patient onboarding, clinic matching, consultations, concierge services, bookings, and patient journey tracking.
+
+**Stage 8: Enterprise Functionality**
+
+Add projects, team collaboration, workflow automation, financial modules, document management, and reporting.
+
+**Stage 9: Integrations**
+
+Connect supported communication, payment, calendar, video consultation, email, and travel-service providers.
+
+**Stage 10: Validation and Deployment**
+
+Test permissions, integrations, workflows, security, performance, and responsiveness.
+
+Prepare deployment documentation and operational procedures.
+
+---
+
+# PHASE 16: ACCEPTANCE CRITERIA
+
+The platform is not complete until these workflows work end to end:
+
+1. A patient creates an account and submits a treatment inquiry.
+2. The inquiry automatically appears in the employee CRM.
+3. The coordinator can review the budget and desired travel dates.
+4. The coordinator can identify and compare matching clinics.
+5. Selected clinic partners can receive authorized referral requests.
+6. Partners can submit offers and proposed appointment dates.
+7. The employee can send the available options to the patient.
+8. The patient can choose a clinic.
+9. The patient can request an online consultation.
+10. The medical provider can respond through an authorized workflow.
+11. The coordinator can prepare travel and accommodation services.
+12. The patient can view confirmed bookings and payments.
+13. Partners can manage their assigned bookings and financial transactions.
+14. The CEO can monitor operational performance, staff activity, bookings, revenue, and partner relationships.
+15. All four workspaces reflect the same underlying records without exposing unauthorized information.
+
+Also test that one partner cannot access another partner's data, one patient cannot access another patient's records, and employees cannot access restricted CEO or medical information without authorization.
+
+---
+
+# FINAL DEVELOPMENT INSTRUCTIONS
+
+I do not want a collection of disconnected dashboards.
+
+I want one integrated MediMATCH ecosystem with four purpose-built workspaces.
+
+All four workspaces must connect to the same secure backend and reflect live operational data according to their permissions.
+
+Preserve existing functionality wherever possible.
+
+Reuse legally compatible components and patterns from my uploaded CRM projects.
+
+Build original functionality where reuse is not appropriate.
+
+Prioritize high-quality design, functional completeness, security, stability, and maintainability.
+
+Do not create only frontend mockups.
+
+Every visible action should have genuine functionality or be clearly identified as not yet implemented.
+
+Do not claim features are completed unless they are implemented and tested.
+
+**START NOW:**
+
+First, inspect the complete repository and the three uploaded CRM projects.
+
+Identify the current architecture, source licenses, existing modules, and technical risks.
+
+Then produce:
+
+1. A comparison of the existing CRM systems.
+2. A proposed unified MediMATCH architecture.
+3. A complete feature implementation checklist.
+4. A database design.
+5. A role and permissions matrix.
+6. A staged development plan.
+
+After the audit, begin implementation with the shared authentication system, four secure workspaces, and core CRM, building and testing each stage before continuing.
+
+**The final objective is a premium, professional MediMATCH platform capable of managing an international medical tourism coordination business from first patient contact through clinic matching, consultation, travel planning, treatment coordination, and aftercare.**
