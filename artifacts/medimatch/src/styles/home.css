@@ -6,22 +6,22 @@
 
 .mmh {
   --mmh-navy: #072f69;
-  --mmh-blue: #0b4595;
-  --mmh-royal: #1259b8;
+  --mmh-blue: #0866cc;
+  --mmh-royal: #0866cc;
   --mmh-cyan: #79d4ef;
   --mmh-orange: #c64b12;
-  --mmh-orange-dark: #a83f0e;
+  --mmh-orange-dark: #99390c;
   --mmh-red: #c9343e;
-  --mmh-red-dark: #a82a33;
+  --mmh-red-dark: #a52831;
   --mmh-green: #087f5b;
-  --mmh-green-dark: #066a4c;
+  --mmh-green-dark: #066449;
   --mmh-yellow: #f5c542;
-  --mmh-text: #33496b;
-  --mmh-muted: #55657f;
-  --mmh-line: #dbe5f0;
-  --mmh-soft: #f4f8fc;
-  --mmh-sky: #ebf5fc;
-  --mmh-link: #1565c0;
+  --mmh-text: #102a43;
+  --mmh-muted: #526477;
+  --mmh-line: #dce5ee;
+  --mmh-soft: #f4f7fb;
+  --mmh-sky: #eaf3ff;
+  --mmh-link: #0866cc;
   min-height: 100vh;
   background: #fff;
   color: var(--mmh-text);
@@ -1403,7 +1403,7 @@
   .mmh-hero {
     display: flex;
     flex-direction: column;
-    background: linear-gradient(160deg, #062a5e 0%, #0b4595 100%);
+    background: linear-gradient(160deg, #072f69 0%, #0866cc 100%);
   }
 
   .mmh-hero__shape {

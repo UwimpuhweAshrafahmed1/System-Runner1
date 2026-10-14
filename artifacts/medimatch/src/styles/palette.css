@@ -1,0 +1,611 @@
+/*
+ * Approved MediMATCH palette bridge for shared and legacy screen components.
+ * Layout is intentionally untouched; status colours remain semantic.
+ */
+:root {
+  --accent: var(--mm-brand-blue);
+  --accent-strong: var(--mm-brand-navy);
+  --ink: var(--mm-brand-text);
+  --wash: var(--mm-brand-background);
+  --ime-navy: var(--mm-brand-navy);
+  --ime-blue: var(--mm-brand-blue);
+  --ime-teal: var(--mm-brand-cyan);
+  --ime-orange: var(--mm-brand-orange);
+  --ime-red: var(--mm-brand-red);
+  --ime-ink: var(--mm-brand-text);
+  --ime-pale: var(--mm-brand-background);
+  --ime-border: var(--mm-brand-line);
+  --ime-white: var(--mm-brand-white);
+  --line: rgb(16 42 67 / 13%);
+  --soft-line: rgb(16 42 67 / 8%);
+  --signal-blue: var(--mm-brand-blue);
+  --signal-orange: var(--mm-brand-orange);
+  --signal-green: var(--mm-brand-green);
+  --signal-red: var(--mm-brand-red);
+}
+
+/* Shared shell and navigation */
+.ime-utility-bar,
+.care-utility,
+.care-footer,
+.workspace-next-actions {
+  background-color: var(--mm-brand-navy);
+}
+
+.ime-language-chip,
+.ime-partnership,
+.care-header nav a:hover,
+.care-header nav a.is-active,
+.care-nav-links a:hover,
+.care-nav-links a.is-active,
+.workspace-topbar nav a:hover,
+.workspace-topbar nav a.is-active,
+.auth-masthead__right a,
+.workspace-empty a,
+.staff-inline-icon {
+  color: var(--mm-brand-blue);
+}
+
+.global-bar,
+.care-header,
+.workspace-topbar,
+.auth-page__top,
+.auth-masthead,
+.care-panel,
+.workspace-panel,
+.workspace-journey,
+.workspace-kpi-grid article,
+.auth-portal,
+.care-appointment-card,
+.care-login-card,
+.care-access-card,
+.workspace-access-card {
+  border-color: var(--mm-brand-line);
+}
+
+.brand-link,
+.studio-mark,
+.care-brand,
+.workspace-brand strong,
+.care-panel h2,
+.care-section-heading h2,
+.staff-heading h1,
+.workspace-section-head h2,
+.workspace-panel__head h2,
+.workspace-kpi-grid strong,
+.workspace-empty strong,
+.patient-request strong,
+.patient-appointment strong,
+.clinic-lead strong,
+.admin-lead strong,
+.admin-appointment-list strong,
+.auth-brand,
+.auth-hero h1,
+.auth-portal h2,
+.auth-role-card__copy strong {
+  color: var(--mm-brand-navy);
+}
+
+.care-nav-links a,
+.care-header nav a,
+.care-user,
+.workspace-topbar nav a,
+.workspace-user,
+.auth-page__top,
+.auth-masthead__right,
+.care-loading,
+.care-inline-status,
+.care-section-heading p,
+.staff-heading p,
+.staff-queue-item__time span,
+.staff-queue-item__patient span,
+.workspace-panel p,
+.workspace-kpi-grid small,
+.patient-request span,
+.patient-request small,
+.patient-appointment span,
+.clinic-lead span,
+.clinic-lead small,
+.admin-lead span,
+.admin-lead small,
+.admin-appointment-list span,
+.workspace-empty,
+.workspace-loading,
+.auth-hero > p,
+.auth-portal__intro,
+.auth-role-card__copy > span {
+  color: #526477;
+}
+
+/* Care booking flow: primary actions are orange; selection is blue/cyan. */
+.care-portal {
+  background: var(--mm-brand-background);
+  color: var(--mm-brand-text);
+}
+
+.care-hero {
+  background: linear-gradient(108deg, var(--mm-brand-navy) 0%, var(--mm-brand-blue) 68%, #2388d3 100%);
+}
+
+.care-hero h1 em,
+.care-hero__eyebrow,
+.care-hero .care-eyebrow,
+.care-utility__right {
+  color: var(--mm-brand-cyan);
+}
+
+.care-hero__card,
+.care-panel,
+.care-login-card,
+.care-access-card {
+  background-color: var(--mm-brand-white);
+}
+
+.care-hero__card-icon,
+.care-nav-links a:hover,
+.care-nav-links a.is-active,
+.care-date-strip button:hover,
+.care-date-strip button.is-selected,
+.care-provider.is-selected,
+.care-slot.is-selected {
+  background-color: var(--mm-brand-blue-tint);
+}
+
+.care-provider,
+.care-date-strip button,
+.care-slot,
+.care-selection--empty,
+.care-field input,
+.care-field select,
+.care-field textarea {
+  color: var(--mm-brand-text);
+  border-color: var(--mm-brand-line);
+}
+
+.care-provider.is-selected,
+.care-date-strip button.is-selected,
+.care-slot.is-selected {
+  border-color: var(--mm-brand-blue);
+  color: var(--mm-brand-navy);
+  box-shadow: 0 0 0 3px rgb(8 102 204 / 14%);
+}
+
+.care-provider > svg,
+.care-panel__icon,
+.care-empty svg,
+.care-login-card > svg,
+.care-access-card > svg,
+.care-date-strip button.is-selected,
+.care-date-strip button.is-selected strong,
+.care-inline-status {
+  color: var(--mm-brand-blue);
+}
+
+.care-provider__avatar,
+.care-appointment-card__date,
+.care-hero__card-icon {
+  background-color: var(--mm-brand-blue-tint);
+  color: var(--mm-brand-blue);
+}
+
+.care-slot,
+.care-date-strip button,
+.care-provider,
+.care-field input,
+.care-field select,
+.care-field textarea {
+  background-color: var(--mm-brand-white);
+}
+
+.care-primary-button,
+.care-sign-in,
+.auth-submit,
+.auth-role-card button,
+.workspace-access-card button,
+.workspace-access-card a,
+.team-access-row button:not(:disabled),
+.workspace-primary-button {
+  background-color: var(--mm-brand-orange);
+  color: var(--mm-brand-white);
+}
+
+.care-primary-button:hover:not(:disabled),
+.care-sign-in:hover,
+.auth-submit:hover,
+.auth-role-card button:hover,
+.workspace-access-card button:hover,
+.workspace-access-card a:hover,
+.team-access-row button:hover:not(:disabled),
+.workspace-primary-button:hover {
+  background-color: #99390c;
+  color: var(--mm-brand-white);
+}
+
+.care-primary-button:disabled,
+.team-access-row button:disabled {
+  background-color: #d5dde5;
+  color: var(--mm-status-disabled);
+}
+
+.care-provider:hover,
+.care-date-strip button:hover,
+.care-field input:focus,
+.care-field select:focus,
+.care-field textarea:focus {
+  border-color: var(--mm-brand-blue);
+}
+
+.care-selection {
+  border-left-color: var(--mm-brand-orange);
+  background: var(--mm-brand-orange-tint);
+}
+
+.care-selection--empty {
+  border-left-color: var(--mm-brand-line);
+  background: var(--mm-brand-background);
+}
+
+.care-alert--success,
+.care-status--confirmed,
+.care-status--checked-in,
+.care-status--completed,
+.staff-notification-status__chips .is-ready {
+  background: var(--mm-brand-green-tint);
+  color: var(--mm-brand-green);
+}
+
+.care-alert--error,
+.care-status--cancelled {
+  background: var(--mm-brand-red-tint);
+  color: var(--mm-brand-red);
+}
+
+.care-status--pending,
+.care-connection--connecting i,
+.care-connection--reconnecting i,
+.staff-notification-status__chips .is-pending {
+  background: var(--mm-brand-yellow-tint);
+  color: #5c4700;
+}
+
+.care-connection--connecting i,
+.care-connection--reconnecting i {
+  background-color: var(--mm-brand-yellow);
+}
+
+.care-error,
+.care-cancel {
+  color: var(--mm-brand-red);
+}
+
+.care-empty strong,
+.care-selection strong,
+.care-appointment-card h3,
+.care-past-card strong,
+.care-field,
+.staff-request-details dd {
+  color: var(--mm-brand-text);
+}
+
+/* Sign-in, patient, staff, partner, and admin workspace surfaces */
+.auth-page,
+.auth-page--multi,
+.workspace-shell,
+.workspace-shell--patient,
+.care-portal--staff {
+  background: var(--mm-brand-background);
+  color: var(--mm-brand-text);
+}
+
+.auth-page {
+  background-image: linear-gradient(135deg, #f4f7fb 0%, #ffffff 48%, #eaf3ff 100%);
+}
+
+.workspace-hero {
+  background: linear-gradient(119deg, var(--mm-brand-navy) 0%, var(--mm-brand-blue) 72%, #2388d3 100%);
+}
+
+.workspace-hero .care-eyebrow::before,
+.care-live-dot {
+  background-color: var(--mm-brand-cyan);
+}
+
+.workspace-hero .care-eyebrow,
+.workspace-hero__meta span {
+  color: #e9f8ff;
+}
+
+.kpi-icon--blue,
+.provider-coverage__avatar,
+.patient-request__mark,
+.workspace-access-card > svg,
+.care-empty svg,
+.workspace-panel__head > svg,
+.workspace-empty svg {
+  color: var(--mm-brand-blue);
+}
+
+.kpi-icon--blue,
+.provider-coverage__avatar,
+.patient-request__mark,
+.workspace-filter-tabs button.is-active,
+.care-filter-tabs button.is-active,
+.staff-queue-item:hover,
+.staff-queue-item.is-selected,
+.pipeline-strip button.is-active,
+.pipeline-strip button:hover {
+  background-color: var(--mm-brand-blue-tint);
+}
+
+.kpi-icon--mint,
+.auth-role-card__icon--mint,
+.auth-portal__secure,
+.clinic-lead__avatar {
+  background-color: var(--mm-brand-green-tint);
+  color: var(--mm-brand-green);
+}
+
+.workspace-live,
+.auth-selected-row__lock,
+.care-preferences__privacy {
+  color: var(--mm-brand-green);
+}
+
+.workspace-live i,
+.auth-online-dot {
+  background-color: var(--mm-brand-green);
+}
+
+.kpi-icon--orange,
+.auth-role-card__icon--orange,
+.auth-hero__quote {
+  background-color: var(--mm-brand-orange-tint);
+  color: var(--mm-brand-orange);
+}
+
+.kpi-icon--red {
+  background-color: var(--mm-brand-red-tint);
+  color: var(--mm-brand-red);
+}
+
+.auth-role-card__icon--blue {
+  background-color: var(--mm-brand-blue-tint);
+  color: var(--mm-brand-blue);
+}
+
+.workspace-kpi-grid article,
+.workspace-journey,
+.workspace-panel,
+.workspace-access-card,
+.care-login-card,
+.care-access-card,
+.auth-portal,
+.auth-card {
+  background-color: var(--mm-brand-white);
+}
+
+.workspace-panel,
+.workspace-journey,
+.workspace-kpi-grid article,
+.workspace-access-card,
+.care-login-card,
+.care-access-card,
+.auth-portal,
+.auth-card,
+.auth-role-card,
+.patient-request,
+.patient-appointment,
+.clinic-queue-item,
+.clinic-lead,
+.admin-lead,
+.admin-appointment-list article,
+.provider-coverage-grid article,
+.pipeline-strip button,
+.care-filter-tabs button,
+.workspace-filter-tabs button,
+.staff-status-actions button {
+  border-color: var(--mm-brand-line);
+}
+
+.workspace-topbar nav a:hover,
+.workspace-topbar nav a.is-active,
+.workspace-filter-tabs button.is-active,
+.care-filter-tabs button.is-active,
+.pipeline-strip button.is-active,
+.pipeline-strip button:hover,
+.staff-queue-item:hover,
+.staff-queue-item.is-selected,
+.staff-status-actions button.is-active,
+.auth-role-card.is-selected {
+  color: var(--mm-brand-blue);
+  border-color: var(--mm-brand-blue);
+}
+
+.journey-step.is-complete,
+.journey-step.is-complete span,
+.workspace-live,
+.auth-portal__secure {
+  color: var(--mm-brand-green);
+}
+
+.journey-step.is-complete span {
+  border-color: var(--mm-brand-green);
+  background: var(--mm-brand-green-tint);
+}
+
+.journey-step.is-current,
+.journey-step.is-current span,
+.admin-appointment__date strong,
+.clinic-queue-item__time strong,
+.admin-lead__code,
+.auth-portal__eyebrow,
+.auth-role-card__copy small,
+.auth-card__note svg {
+  color: var(--mm-brand-blue);
+}
+
+.journey-step.is-current span {
+  border-color: var(--mm-brand-blue);
+  background: var(--mm-brand-blue-tint);
+}
+
+.journey-step.is-complete::before {
+  background: var(--mm-brand-green);
+}
+
+.workspace-next-actions {
+  color: var(--mm-brand-white);
+}
+
+.workspace-next-actions a,
+.workspace-next-actions h2 {
+  color: var(--mm-brand-cyan);
+}
+
+.auth-hero h1 em,
+.workspace-hero h1 em {
+  color: var(--mm-brand-cyan);
+}
+
+.auth-hero__quote {
+  border-left-color: var(--mm-brand-orange);
+}
+
+.auth-hero__quote > span {
+  color: var(--mm-brand-orange);
+}
+
+.team-access-row__avatar,
+.care-access-card button,
+.care-login-card button,
+.workspace-filter-tabs button.is-active,
+.care-filter-tabs button.is-active,
+.staff-status-actions button.is-active {
+  background-color: var(--mm-brand-blue-tint);
+  color: var(--mm-brand-blue);
+}
+
+.team-access-row__who strong,
+.team-access-row select,
+.staff-request-details dd {
+  color: var(--mm-brand-text);
+}
+
+.team-access-row__who span,
+.team-access-intro,
+.team-access-row__self,
+.care-form-note,
+.care-field small,
+.staff-coming-later {
+  color: #526477;
+}
+
+.team-access-row select:disabled {
+  background: #edf1f5;
+  color: var(--mm-status-disabled);
+}
+
+.team-access-row__avatar,
+.care-login-card button,
+.care-access-card button {
+  border-color: var(--mm-brand-line);
+}
+
+.staff-coming-later,
+.staff-detail-meta,
+.staff-request-details,
+.auth-selected-row {
+  background-color: var(--mm-brand-background);
+}
+
+.care-portal :focus-visible,
+.workspace-shell :focus-visible,
+.auth-page :focus-visible,
+.site-root :focus-visible,
+.mmh :focus-visible {
+  outline-color: var(--mm-brand-blue);
+}
+
+/* Keep the additional selected and focus states visible against every surface. */
+.care-provider:focus-visible,
+.care-date-strip button:focus-visible,
+.care-slot:focus-visible,
+.care-primary-button:focus-visible,
+.care-sign-in:focus-visible,
+.auth-submit:focus-visible,
+.workspace-primary-button:focus-visible,
+.team-access-row button:focus-visible,
+.workspace-filter-tabs button:focus-visible,
+.care-filter-tabs button:focus-visible {
+  outline: 3px solid var(--mm-brand-cyan);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .care-provider,
+  .care-primary-button,
+  .auth-submit,
+  .workspace-primary-button {
+    transition-duration: 0.01ms;
+  }
+}
+
+.dark .care-portal,
+.dark .auth-page,
+.dark .auth-page--multi,
+.dark .workspace-shell,
+.dark .care-portal--staff {
+  background: var(--mm-brand-background);
+  color: var(--mm-brand-text);
+}
+
+.dark .care-panel,
+.dark .care-hero__card,
+.dark .care-login-card,
+.dark .care-access-card,
+.dark .workspace-topbar,
+.dark .workspace-panel,
+.dark .workspace-journey,
+.dark .workspace-kpi-grid article,
+.dark .workspace-access-card,
+.dark .auth-portal,
+.dark .auth-card,
+.dark .care-appointment-card,
+.dark .care-provider,
+.dark .care-date-strip button,
+.dark .care-slot,
+.dark .care-field input,
+.dark .care-field select,
+.dark .care-field textarea {
+  background-color: #132e4d;
+  color: #f1f6fb;
+  border-color: #29435d;
+}
+
+.dark .care-provider__copy strong,
+.dark .care-date-strip strong,
+.dark .care-panel h2,
+.dark .care-section-heading h2,
+.dark .workspace-section-head h2,
+.dark .workspace-panel__head h2,
+.dark .workspace-kpi-grid strong,
+.dark .auth-portal h2,
+.dark .auth-role-card__copy strong {
+  color: #f1f6fb;
+}
+
+.dark .care-slot.is-selected,
+.dark .care-date-strip button.is-selected,
+.dark .care-provider.is-selected {
+  background-color: #173b5f;
+  border-color: var(--mm-brand-cyan);
+}
+
+@media (forced-colors: active) {
+  .care-provider.is-selected,
+  .care-date-strip button.is-selected,
+  .care-slot.is-selected,
+  .auth-role-card.is-selected {
+    outline: 2px solid Highlight;
+  }
+}

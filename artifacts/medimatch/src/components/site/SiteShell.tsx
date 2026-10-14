@@ -35,10 +35,10 @@ const themes: Record<ProductKey, Theme> = {
     eyebrow: "Coordinated care, in one place",
     description:
       "A trusted care navigation system for finding the right doctor, hospital, and next step.",
-    accent: "#0a66c2",
-    accentStrong: "#002d71",
-    wash: "#f5f6fa",
-    ink: "#002d71",
+    accent: "#0866cc",
+    accentStrong: "#072f69",
+    wash: "#f4f7fb",
+    ink: "#102a43",
   },
 };
 

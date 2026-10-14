@@ -8,6 +8,7 @@
 @import './styles/additions.css';
 @import './styles/home.css';
 @import './styles/before-after.css';
+@import './styles/palette.css';
 @plugin "@tailwindcss/typography";
 
 @custom-variant dark (&:is(.dark *));
@@ -76,6 +77,29 @@
 
 /* LIGHT MODE */
 :root {
+  /* Approved MediMATCH brand palette and separate semantic status tokens. */
+  --mm-brand-navy: #072f69;
+  --mm-brand-blue: #0866cc;
+  --mm-brand-cyan: #79d4ef;
+  --mm-brand-orange: #c64b12;
+  --mm-brand-red: #c9343e;
+  --mm-brand-green: #087f5b;
+  --mm-brand-yellow: #f5c542;
+  --mm-brand-white: #ffffff;
+  --mm-brand-background: #f4f7fb;
+  --mm-brand-text: #102a43;
+  --mm-brand-line: #dce5ee;
+  --mm-brand-blue-tint: #eaf3ff;
+  --mm-brand-orange-tint: #fff1e8;
+  --mm-brand-green-tint: #e8f5ef;
+  --mm-brand-red-tint: #fcebed;
+  --mm-brand-yellow-tint: #fff7db;
+  --mm-status-success: var(--mm-brand-green);
+  --mm-status-warning: #6b5100;
+  --mm-status-error: var(--mm-brand-red);
+  --mm-status-selected: var(--mm-brand-blue);
+  --mm-status-disabled: #718096;
+
   --button-outline: rgba(0, 0, 0, 0.1);
   --badge-outline: rgba(0, 0, 0, 0.05);
 
@@ -86,41 +110,41 @@
   --elevate-1: rgba(0, 0, 0, 0.03);
   --elevate-2: rgba(0, 0, 0, 0.08);
 
-  --background: 228 33% 97%;
-  --foreground: 216 100% 22%;
-  --border: 223 24% 88%;
+  --background: 214.3 47% 97%;
+  --foreground: 209.4 61% 16%;
+  --border: 210 35% 90%;
   --card: 0 0% 100%;
-  --card-foreground: 216 100% 22%;
-  --card-border: 223 24% 90%;
-  --sidebar: 225 43% 17%;
+  --card-foreground: 209.4 61% 16%;
+  --card-border: 210 35% 90%;
+  --sidebar: 215.5 87% 22%;
   --sidebar-foreground: 220 30% 94%;
-  --sidebar-border: 225 32% 25%;
-  --sidebar-primary: 207 89% 56%;
+  --sidebar-border: 215 70% 30%;
+  --sidebar-primary: 211.2 92% 42%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 225 34% 24%;
+  --sidebar-accent: 214.3 47% 30%;
   --sidebar-accent-foreground: 220 30% 96%;
-  --sidebar-ring: 207 89% 56%;
+  --sidebar-ring: 193.7 79% 71%;
   --popover: 0 0% 100%;
-  --popover-foreground: 216 100% 22%;
-  --popover-border: 223 24% 90%;
-  --primary: 210 90% 40%;
+  --popover-foreground: 209.4 61% 16%;
+  --popover-border: 210 35% 90%;
+  --primary: 19 83% 42%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 210 42% 93%;
-  --secondary-foreground: 225 45% 22%;
-  --muted: 220 27% 94%;
-  --muted-foreground: 222 15% 48%;
+  --secondary: 193.7 79% 94%;
+  --secondary-foreground: 215.5 87% 22%;
+  --muted: 214.3 47% 97%;
+  --muted-foreground: 211 22% 38%;
   /* Renamed from --accent: the MediMATCH stylesheet uses --accent as a full colour. */
-  --ui-accent: 31 88% 62%;
-  --accent-foreground: 225 45% 18%;
-  --destructive: 0 68% 55%;
+  --ui-accent: 193.7 79% 71%;
+  --accent-foreground: 215.5 87% 22%;
+  --destructive: 356 59% 50%;
   --destructive-foreground: 0 0% 100%;
-  --input: 223 24% 88%;
-  --ring: 210 90% 40%;
-  --chart-1: 207 89% 56%;
-  --chart-2: 149 42% 51%;
-  --chart-3: 31 88% 62%;
-  --chart-4: 265 38% 67%;
-  --chart-5: 0 68% 62%;
+  --input: 210 35% 90%;
+  --ring: 211.2 92% 42%;
+  --chart-1: 211.2 92% 42%;
+  --chart-2: 161.8 88% 26%;
+  --chart-3: 19 83% 42%;
+  --chart-4: 193.7 79% 71%;
+  --chart-5: 356 59% 50%;
   --app-font-sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   --app-font-serif: Georgia, serif;
   --app-font-mono: 'SFMono-Regular', Consolas, monospace;
@@ -199,6 +223,16 @@
 }
 
 .dark {
+  --mm-brand-background: #0c1e32;
+  --mm-brand-text: #f1f6fb;
+  --mm-brand-line: #29435d;
+  --mm-brand-blue-tint: #132e4d;
+  --mm-brand-orange-tint: #402719;
+  --mm-brand-green-tint: #12372f;
+  --mm-brand-red-tint: #421f2a;
+  --mm-brand-yellow-tint: #3b3218;
+  --mm-status-warning: #f5c542;
+
   --button-outline: rgba(255, 255, 255, 0.1);
   --badge-outline: rgba(255, 255, 255, 0.05);
 
@@ -208,40 +242,40 @@
   --elevate-1: rgba(255, 255, 255, 0.04);
   --elevate-2: rgba(255, 255, 255, 0.09);
 
-  --background: 225 38% 12%;
-  --foreground: 220 28% 94%;
-  --border: 225 26% 26%;
-  --card: 225 34% 16%;
-  --card-foreground: 220 28% 94%;
-  --card-border: 225 26% 25%;
-  --sidebar: 225 45% 9%;
+  --background: 212 61% 11%;
+  --foreground: 210 33% 95%;
+  --border: 211 36% 26%;
+  --card: 212 46% 15%;
+  --card-foreground: 210 33% 95%;
+  --card-border: 211 36% 26%;
+  --sidebar: 215.5 87% 13%;
   --sidebar-foreground: 220 28% 94%;
-  --sidebar-border: 225 26% 20%;
-  --sidebar-primary: 207 89% 56%;
+  --sidebar-border: 215 55% 24%;
+  --sidebar-primary: 211.2 92% 52%;
   --sidebar-primary-foreground: 0 0% 100%;
-  --sidebar-accent: 225 30% 19%;
+  --sidebar-accent: 215 47% 23%;
   --sidebar-accent-foreground: 220 28% 94%;
-  --sidebar-ring: 207 89% 56%;
-  --popover: 225 34% 16%;
-  --popover-foreground: 220 28% 94%;
-  --popover-border: 225 26% 25%;
-  --primary: 207 89% 56%;
+  --sidebar-ring: 193.7 79% 71%;
+  --popover: 212 46% 15%;
+  --popover-foreground: 210 33% 95%;
+  --popover-border: 211 36% 26%;
+  --primary: 19 83% 48%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 225 28% 23%;
-  --secondary-foreground: 220 28% 94%;
-  --muted: 225 28% 20%;
-  --muted-foreground: 220 16% 68%;
-  --ui-accent: 31 78% 58%;
-  --accent-foreground: 225 45% 12%;
-  --destructive: 0 63% 55%;
+  --secondary: 193.7 55% 24%;
+  --secondary-foreground: 210 33% 95%;
+  --muted: 211 36% 20%;
+  --muted-foreground: 210 21% 72%;
+  --ui-accent: 193.7 79% 61%;
+  --accent-foreground: 215.5 87% 13%;
+  --destructive: 356 59% 55%;
   --destructive-foreground: 0 0% 100%;
-  --input: 225 26% 25%;
-  --ring: 207 89% 56%;
-  --chart-1: 207 89% 56%;
-  --chart-2: 149 42% 51%;
-  --chart-3: 31 88% 62%;
-  --chart-4: 265 38% 67%;
-  --chart-5: 0 68% 62%;
+  --input: 211 36% 26%;
+  --ring: 193.7 79% 61%;
+  --chart-1: 211.2 92% 55%;
+  --chart-2: 161.8 68% 44%;
+  --chart-3: 19 83% 58%;
+  --chart-4: 193.7 79% 71%;
+  --chart-5: 356 59% 62%;
 
   --shadow-2xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);
   --shadow-xs: 0px 2px 0px 0px hsl(202.8169 89.1213% 53.1373% / 0);

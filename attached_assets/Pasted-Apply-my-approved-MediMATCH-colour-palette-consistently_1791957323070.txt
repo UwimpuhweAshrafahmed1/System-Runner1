@@ -1,0 +1,77 @@
+Apply my approved MediMATCH colour palette consistently across the ENTIRE existing application—not only the homepage.
+
+This is a visual styling update. Preserve all existing functionality, page layouts, content, data, routes, authentication, permissions, bookings, CRM workflows, and integrations.
+
+COLOUR PALETTE
+- Deep navy: #072F69
+- Royal blue: #0866CC
+- Light cyan: #79D4EF
+- Deep orange: #C64B12
+- Rich red: #C9343E
+- Emerald green: #087F5B
+- Golden yellow: #F5C542
+- White: #FFFFFF
+- Soft background: #F4F7FB
+- Main text: #102A43
+
+Use the approved colourful homepage image as the visual reference.
+
+APPLY THROUGHOUT THE SYSTEM
+Inspect all existing pages and apply the shared theme to:
+- Public homepage and treatment pages.
+- Appointments and booking steps.
+- Sign-in, registration, and password recovery.
+- Patient portal.
+- Care desk.
+- Staff, partner, administrator, and executive dashboards.
+- CRM, patient records, calendars, quotations, and reports.
+- Before-and-after illustration gallery.
+- Navigation, sidebars, cards, forms, tables, modals, notifications, and footers.
+
+Only update modules that already exist. Do not create new features for this task.
+
+COLOUR RULES
+1. Keep navy and blue as the foundation for headers, navigation, headings, and links.
+2. Use deep orange for primary actions such as Book appointment, Request consultation, Save, and Continue.
+3. Use cyan for supporting highlights and selected decorative details.
+4. Use green for successful, confirmed, and completed states.
+5. Use red for errors, destructive actions, and urgent alerts.
+6. Use yellow for pending states, reminders, and warnings, with dark text.
+7. Use pale orange, green, red, and yellow tints on selected cards, icon backgrounds, and section accents.
+8. Keep forms and data-heavy screens mostly white or softly tinted for readability.
+9. Use the homepage’s multicolour accent strip where appropriate without putting every colour on every component.
+10. Give the same action or status the same colour everywhere.
+
+In operational screens, reserve status colours for their meaning. Decorative red must not make an ordinary booking card look like an error. Preserve any existing clinically meaningful colour conventions.
+
+SPECIFICALLY UPDATE THE APPOINTMENTS PAGE
+- Retain its current layout, provider selection, time slots, and booking form.
+- Keep the navy-to-blue hero with cyan headline accents.
+- Introduce deep orange primary booking buttons.
+- Add coordinated colour accents to step numbers and supporting icons.
+- Make selected providers and time slots clearly identifiable through borders, icons, and labels.
+- Use green for confirmed bookings, yellow for pending states, and red for actual validation errors.
+- Preserve disabled, unavailable, loading, and selected states.
+
+IMPLEMENTATION
+1. Inspect the existing styling system and create a checkpoint.
+2. Define a single shared set of theme tokens using the existing CSS variables, Tailwind configuration, or theme provider.
+3. Separate brand colours from semantic tokens such as success, warning, error, selected, and disabled.
+4. Update shared components first, then replace inconsistent page-specific colours.
+5. Avoid blanket CSS overrides, indiscriminate colour replacement, and excessive !important rules.
+6. Define hover, active, focus, disabled, and loading styles.
+7. Maintain readable contrast. Use darker palette variants when needed for small text and button labels.
+8. Never communicate status through colour alone; retain labels and icons.
+9. If dark mode exists, update and verify it too.
+10. Do not change backend logic, database schemas, dependencies, or access controls for a colour update.
+
+VERIFY
+- Run the build and relevant existing checks.
+- Inspect representative public and signed-in pages at desktop and mobile sizes.
+- Test booking, sign-in, forms, navigation, modals, and validation states.
+- Confirm buttons, text, icons, table rows, and focus indicators remain readable.
+- Check for accidental layout changes and inconsistent old colours.
+- Verify actual rendered pages rather than relying only on code inspection.
+- Do not publish automatically.
+
+Implement the complete theme update. Finish with a concise summary of the pages and shared components updated, checks performed, and any remaining inconsistencies. Clearly state anything you could not verify.
