@@ -46,10 +46,6 @@ function stripBase(path: string): string {
     : path;
 }
 
-if (!clerkPubKey) {
-  throw new Error('Missing VITE_CLERK_PUBLISHABLE_KEY');
-}
-
 // Approved MediMATCH palette, shared with the app's CSS theme tokens.
 const clerkAppearance = {
   theme: shadcn,
@@ -161,6 +157,17 @@ function Routes() {
   );
 }
 
+function PublicPreviewRoutes() {
+  return (
+    <QueryClientProvider client={queryClient}>
+      <TooltipProvider>
+        <Routes />
+        <Toaster />
+      </TooltipProvider>
+    </QueryClientProvider>
+  );
+}
+
 function ClerkProviderWithRoutes() {
   const [, setLocation] = useLocation();
 
@@ -202,7 +209,7 @@ function ClerkProviderWithRoutes() {
 function App() {
   return (
     <WouterRouter base={basePath}>
-      <ClerkProviderWithRoutes />
+      {clerkPubKey ? <ClerkProviderWithRoutes /> : <PublicPreviewRoutes />}
     </WouterRouter>
   );
 }

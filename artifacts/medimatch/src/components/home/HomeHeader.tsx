@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState, type FocusEvent, type RefObject } from "react";
 import { Link, useLocation } from "wouter";
-import { useAuth } from "@clerk/react";
 import { ArrowRight, ChevronDown, Globe, Headset, Menu, X } from "lucide-react";
 import { StudioMark } from "@/components/site/SiteShell";
 import { galleryAvailable, galleryPath } from "@/lib/illustrations";
@@ -79,8 +78,7 @@ function TreatmentsMenu() {
 }
 
 export function HomeHeader() {
-  const { isLoaded, isSignedIn } = useAuth();
-  const signInLabel = isLoaded && isSignedIn ? "My workspace" : "Sign in";
+  const signInLabel = "Sign in";
   const [menuOpen, setMenuOpen] = useState(false);
   const headerRef = useRef<HTMLElement>(null);
   const toggleRef = useRef<HTMLButtonElement>(null);
